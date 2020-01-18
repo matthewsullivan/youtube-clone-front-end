@@ -1,5 +1,5 @@
 # youtube-clone-front-end
-Youtube Clone built using React
+YouTube Clone built using React
 
 ### `npm start`
 
