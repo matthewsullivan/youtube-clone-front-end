@@ -41,6 +41,15 @@ const styles = (theme) => ({
     paddingTop: toolBarHeight,
   },
 
+  divider: {
+    background: '#3e3e3e',
+    margin: '12px 0',
+  },
+
+  dividerHidden: {
+    display: 'none',
+  },
+
   drawer: {
     background: primaryColor,
     color: '#fff',
@@ -107,23 +116,31 @@ class App extends React.Component {
    */
   _getDrawerContent = (classes) => {
     return primaryNavigation.map((item, index) => (
-      <ListItem
-        button
-        className={clsx(classes.navList)}
-        component={Link}
-        key={item.page}
-        onClick={() => this._handleListItemClick(index)}
-        selected={this.state.selectedIndex === index}
-        to={item.component}
-      >
-        <ListItemIcon className={clsx(classes.navListIcon)}>
-          {item.icon}
-        </ListItemIcon>
-        <ListItemText
-          classes={{primary: classes.navListText}}
-          primary={item.page}
+      <>
+        <ListItem
+          button
+          className={clsx(classes.navList)}
+          component={Link}
+          key={item.page}
+          onClick={() => this._handleListItemClick(index)}
+          selected={this.state.selectedIndex === index}
+          to={item.component}
+        >
+          <ListItemIcon className={clsx(classes.navListIcon)}>
+            {item.icon}
+          </ListItemIcon>
+          <ListItemText
+            classes={{primary: classes.navListText}}
+            primary={item.page}
+          />
+        </ListItem>
+
+        <Divider
+          className={
+            index === 2 || index === 6 ? classes.divider : classes.dividerHidden
+          }
         />
-      </ListItem>
+      </>
     ));
   };
 
@@ -187,7 +204,6 @@ class App extends React.Component {
             variant="permanent"
           >
             {this._getDrawerContent(classes)}
-            <Divider />
           </Drawer>
 
           <main className={classes.content}>
