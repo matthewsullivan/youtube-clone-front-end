@@ -10,12 +10,14 @@ import PropTypes from 'prop-types';
 
 const styles = (theme) => ({
   container: {
-    paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
+    paddingTop: theme.spacing(4),
   },
+
   fixedHeight: {
     height: 240,
   },
+
   paper: {
     display: 'flex',
     flexDirection: 'column',

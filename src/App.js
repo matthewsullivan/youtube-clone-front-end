@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
@@ -8,14 +10,13 @@ import IconButton from '@material-ui/core/IconButton';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 
 import FolderOpenSharp from '@material-ui/icons/FolderOpenSharp';
-import DashboardIcon from '@material-ui/icons/Dashboard';
+import HomeIcon from '@material-ui/icons/Home';
+import MenuIcon from '@material-ui/icons/Menu';
 
 import {withStyles} from '@material-ui/core/styles';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -32,45 +33,53 @@ const styles = (theme) => ({
   root: {
     display: 'flex',
   },
-  appBarSpacer: theme.mixins.toolbar,
-  container: {
-    paddingBottom: theme.spacing(4),
-    paddingTop: theme.spacing(4),
-  },
+
   content: {
     background: secondaryColor,
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
+    paddingTop: toolBarHeight,
   },
-  drawerPaper: {
+
+  drawer: {
     background: primaryColor,
     color: '#fff',
+    height: `calc(100vh - ${toolBarHeight}px)`,
     position: 'relative',
+    paddingTop: '12px',
     top: toolBarHeight,
     whiteSpace: 'nowrap',
     width: drawerWidth,
   },
-  drawerPaperClose: {
-    overflowX: 'hidden',
+
+  drawerClose: {
     width: theme.spacing(7),
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(9),
     },
   },
-  paper: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: theme.spacing(2),
-    overflow: 'auto',
-  },
+
   toolbar: {
     background: primaryColor,
     minHeight: toolBarHeight,
   },
+
   logo: {
     width: 80,
   },
+
+  navList: {
+    height: 40,
+    color: '#fff',
+  },
+
+  navListIcon: {
+    color: '#fff',
+    marginLeft: '8px',
+    minWidth: '48px',
+  },
+
   menuButton: {
     marginRight: 12,
   },
@@ -80,7 +89,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {open: true};
+    this.state = {open: true, selectedIndex: 0};
   }
 
   static propTypes = {
@@ -92,6 +101,14 @@ class App extends React.Component {
    */
   _handleToggle = () => {
     this.setState({open: !this.state.open});
+  };
+
+  /**
+   * Handle List Item Click
+   * @param {number} index
+   */
+  _handleListItemClick = (index) => {
+    this.setState({selectedIndex: index});
   };
 
   /**
@@ -131,26 +148,35 @@ class App extends React.Component {
           <Drawer
             classes={{
               paper: clsx(
-                classes.drawerPaper,
-                !this.state.open && classes.drawerPaperClose
+                classes.drawer,
+                !this.state.open && classes.drawerClose
               ),
             }}
             open={this.state.open}
             variant="permanent"
           >
-            <ListItem button component={Link} to="/">
-              <ListItemIcon>
-                <DashboardIcon />
+            <ListItem
+              button
+              className={clsx(classes.navList)}
+              component={Link}
+              onClick={() => this._handleListItemClick(0)}
+              selected={this.state.selectedIndex === 0}
+              to="/"
+            >
+              <ListItemIcon className={clsx(classes.navListIcon)}>
+                <HomeIcon />
               </ListItemIcon>
               <ListItemText primary="Home" />
             </ListItem>
             <ListItem
               button
+              className={clsx(classes.navList)}
               component={Link}
-              onClick={this._handleTitle}
+              onClick={() => this._handleListItemClick(1)}
+              selected={this.state.selectedIndex === 1}
               to="/template"
             >
-              <ListItemIcon>
+              <ListItemIcon className={clsx(classes.navListIcon)}>
                 <FolderOpenSharp />
               </ListItemIcon>
               <ListItemText primary="Template" />
@@ -160,7 +186,6 @@ class App extends React.Component {
           </Drawer>
 
           <main className={classes.content}>
-            <div className={classes.appBarSpacer} />
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/template" component={Template} />
