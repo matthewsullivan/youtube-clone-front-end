@@ -12,7 +12,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Toolbar from '@material-ui/core/Toolbar';
 
-import FolderOpenSharp from '@material-ui/icons/FolderOpenSharp';
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 
@@ -23,6 +22,7 @@ import PropTypes from 'prop-types';
 
 import Home from './components/Home';
 import Template from './components/Template';
+import primaryNavigation from './objects/navigation';
 
 const drawerWidth = 240;
 const primaryColor = '#272727';
@@ -97,10 +97,27 @@ class App extends React.Component {
   };
 
   /**
-   * Handle Toggle
+   * Get Drawer Content
+   * @param {object} classes
+   * @return {jsx}
    */
-  _handleToggle = () => {
-    this.setState({open: !this.state.open});
+  _getDrawerContent = (classes) => {
+    return primaryNavigation.map((item, index) => (
+      <ListItem
+        button
+        className={clsx(classes.navList)}
+        component={Link}
+        key={item.page}
+        onClick={() => this._handleListItemClick(index)}
+        selected={this.state.selectedIndex === index}
+        to={item.component}
+      >
+        <ListItemIcon className={clsx(classes.navListIcon)}>
+          <HomeIcon />
+        </ListItemIcon>
+        <ListItemText primary={item.page} />
+      </ListItem>
+    ));
   };
 
   /**
@@ -109,6 +126,13 @@ class App extends React.Component {
    */
   _handleListItemClick = (index) => {
     this.setState({selectedIndex: index});
+  };
+
+  /**
+   * Handle Toggle
+   */
+  _handleToggle = () => {
+    this.setState({open: !this.state.open});
   };
 
   /**
@@ -133,7 +157,7 @@ class App extends React.Component {
                 className={clsx(classes.menuButton)}
                 color="inherit"
                 edge="start"
-                onClick={this._handleToggle}
+                onClick={() => this._handleToggle()}
               >
                 <MenuIcon />
               </IconButton>
@@ -155,33 +179,7 @@ class App extends React.Component {
             open={this.state.open}
             variant="permanent"
           >
-            <ListItem
-              button
-              className={clsx(classes.navList)}
-              component={Link}
-              onClick={() => this._handleListItemClick(0)}
-              selected={this.state.selectedIndex === 0}
-              to="/"
-            >
-              <ListItemIcon className={clsx(classes.navListIcon)}>
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText primary="Home" />
-            </ListItem>
-            <ListItem
-              button
-              className={clsx(classes.navList)}
-              component={Link}
-              onClick={() => this._handleListItemClick(1)}
-              selected={this.state.selectedIndex === 1}
-              to="/template"
-            >
-              <ListItemIcon className={clsx(classes.navListIcon)}>
-                <FolderOpenSharp />
-              </ListItemIcon>
-              <ListItemText primary="Template" />
-            </ListItem>
-
+            {this._getDrawerContent(classes)}
             <Divider />
           </Drawer>
 
