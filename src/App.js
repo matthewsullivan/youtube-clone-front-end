@@ -12,7 +12,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Toolbar from '@material-ui/core/Toolbar';
 
-import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import {withStyles} from '@material-ui/core/styles';
@@ -74,6 +73,11 @@ const styles = (theme) => ({
     color: '#fff',
   },
 
+  navListText: {
+    fontSize: '0.85rem',
+    letterSpacing: '0.015em;',
+  },
+
   navListIcon: {
     color: '#fff',
     marginLeft: '8px',
@@ -113,9 +117,12 @@ class App extends React.Component {
         to={item.component}
       >
         <ListItemIcon className={clsx(classes.navListIcon)}>
-          <HomeIcon />
+          {item.icon}
         </ListItemIcon>
-        <ListItemText primary={item.page} />
+        <ListItemText
+          classes={{primary: classes.navListText}}
+          primary={item.page}
+        />
       </ListItem>
     ));
   };
