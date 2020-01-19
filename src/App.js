@@ -141,11 +141,10 @@ class App extends React.Component {
    */
   _getDrawerContent = () => {
     return primaryNavigation.map((item, index) => (
-      <>
+      <React.Fragment key={item.page}>
         <ListItem
           button
           component={Link}
-          key={item.page}
           onClick={() => this._handleListItemClick(index)}
           selected={this.state.selectedIndex === index}
           to={item.component}
@@ -165,7 +164,7 @@ class App extends React.Component {
             display: index === 2 || index === 6 ? 'block' : 'none',
           }}
         />
-      </>
+      </React.Fragment>
     ));
   };
 
@@ -225,7 +224,7 @@ class App extends React.Component {
               open={this.state.open}
               variant="permanent"
             >
-              <List component="nav" aria-label="main application navigation">
+              <List aria-label="main application navigation" component="nav">
                 {this._getDrawerContent()}
               </List>
             </Drawer>
