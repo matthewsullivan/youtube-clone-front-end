@@ -38,7 +38,7 @@ const theme = createMuiTheme({
     MuiDivider: {
       root: {
         backgroundColor: '#3e3e3e',
-        margin: '12px 0',
+        margin: '12px 0 8px',
       },
     },
     MuiList: {
@@ -166,7 +166,7 @@ class App extends React.Component {
 
         <Divider
           style={{
-            display: index === 2 || index === 6 ? 'block' : 'none',
+            display: index === 2 || index === 4 ? 'block' : 'none',
           }}
         />
       </React.Fragment>
