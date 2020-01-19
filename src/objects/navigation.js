@@ -19,12 +19,12 @@ const primaryNavigation = [
   {
     component: '',
     page: 'Trending',
-    icon: <WhatshotIcon />,
+    icon: <WhatshotIcon fontSize="small" />,
   },
   {
     component: '',
     page: 'Subscriptions',
-    icon: <SubscriptionsIcon />,
+    icon: <SubscriptionsIcon fontSize="small" />,
   },
   {
     component: '',
@@ -34,27 +34,27 @@ const primaryNavigation = [
   {
     component: '',
     page: 'History',
-    icon: <HistoryIcon />,
+    icon: <HistoryIcon fontSize="small" />,
   },
   {
     component: '',
     page: 'Settings',
-    icon: <SettingsIcon />,
+    icon: <SettingsIcon fontSize="small" />,
   },
   {
     component: '',
     page: 'Report History',
-    icon: <FlagIcon />,
+    icon: <FlagIcon fontSize="small" />,
   },
   {
     component: '',
     page: 'Help',
-    icon: <HelpIcon />,
+    icon: <HelpIcon fontSize="small" />,
   },
   {
     component: '',
     page: 'Send Feedback',
-    icon: <FeedbackIcon />,
+    icon: <FeedbackIcon fontSize="small" />,
   },
 ];
 
