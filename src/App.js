@@ -7,6 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -14,7 +15,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 
 import MenuIcon from '@material-ui/icons/Menu';
 
-import {withStyles} from '@material-ui/core/styles';
+import {
+  MuiThemeProvider,
+  createMuiTheme,
+  withStyles,
+} from '@material-ui/core/styles';
 
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -28,6 +33,57 @@ const primaryColor = '#272727';
 const secondaryColor = '#1e1e1e';
 const toolBarHeight = 56;
 
+const theme = createMuiTheme({
+  overrides: {
+    MuiDivider: {
+      root: {
+        backgroundColor: '#3e3e3e',
+        margin: '12px 0',
+      },
+    },
+    MuiList: {
+      padding: {
+        paddingBottom: 0,
+        paddingTop: 0,
+      },
+    },
+    MuiListItem: {
+      root: {
+        color: '#fff',
+        height: 40,
+        '&$selected': {backgroundColor: '#3e3e3e'},
+      },
+      button: {
+        '&:hover': {
+          backgroundColor: '#3e3e3e',
+        },
+      },
+    },
+    MuiListItemIcon: {
+      root: {
+        color: '#909090',
+        marginLeft: '8px',
+        minWidth: '48px',
+      },
+    },
+    MuiListItemText: {
+      primary: {
+        fontSize: '0.85rem',
+        letterSpacing: '0.015em;',
+      },
+    },
+    MuiToolbar: {
+      regular: {
+        background: primaryColor,
+        minHeight: toolBarHeight,
+        '@media (min-width: 600px)': {
+          minHeight: toolBarHeight,
+        },
+      },
+    },
+  },
+});
+
 const styles = (theme) => ({
   root: {
     display: 'flex',
@@ -39,15 +95,6 @@ const styles = (theme) => ({
     height: '100vh',
     overflow: 'auto',
     paddingTop: toolBarHeight,
-  },
-
-  divider: {
-    background: '#3e3e3e',
-    margin: '12px 0',
-  },
-
-  dividerHidden: {
-    display: 'none',
   },
 
   drawer: {
@@ -68,29 +115,8 @@ const styles = (theme) => ({
     },
   },
 
-  toolbar: {
-    background: primaryColor,
-    minHeight: toolBarHeight,
-  },
-
   logo: {
     width: 80,
-  },
-
-  navList: {
-    height: 40,
-    color: '#fff',
-  },
-
-  navListText: {
-    fontSize: '0.85rem',
-    letterSpacing: '0.015em;',
-  },
-
-  navListIcon: {
-    color: '#fff',
-    marginLeft: '8px',
-    minWidth: '48px',
   },
 
   menuButton: {
@@ -111,34 +137,33 @@ class App extends React.Component {
 
   /**
    * Get Drawer Content
-   * @param {object} classes
    * @return {jsx}
    */
-  _getDrawerContent = (classes) => {
+  _getDrawerContent = () => {
     return primaryNavigation.map((item, index) => (
       <>
         <ListItem
           button
-          className={clsx(classes.navList)}
           component={Link}
           key={item.page}
           onClick={() => this._handleListItemClick(index)}
           selected={this.state.selectedIndex === index}
           to={item.component}
         >
-          <ListItemIcon className={clsx(classes.navListIcon)}>
+          <ListItemIcon
+            style={{
+              color: this.state.selectedIndex === index ? '#fff' : '#909090',
+            }}
+          >
             {item.icon}
           </ListItemIcon>
-          <ListItemText
-            classes={{primary: classes.navListText}}
-            primary={item.page}
-          />
+          <ListItemText primary={item.page} />
         </ListItem>
 
         <Divider
-          className={
-            index === 2 || index === 6 ? classes.divider : classes.dividerHidden
-          }
+          style={{
+            display: index === 2 || index === 6 ? 'block' : 'none',
+          }}
         />
       </>
     ));
@@ -168,51 +193,51 @@ class App extends React.Component {
 
     return (
       <Router>
-        <div className={classes.root}>
-          <CssBaseline />
-          <AppBar
-            className={clsx(classes.appBar, this.state.open)}
-            elevation={0}
-            position="absolute"
-          >
-            <Toolbar className={classes.toolbar}>
-              <IconButton
-                aria-label="open drawer"
-                className={clsx(classes.menuButton)}
-                color="inherit"
-                edge="start"
-                onClick={() => this._handleToggle()}
-              >
-                <MenuIcon />
-              </IconButton>
-              <img
-                alt="Application Logo"
-                className={classes.logo}
-                src="../logo.png"
-              />
-            </Toolbar>
-          </AppBar>
+        <MuiThemeProvider theme={theme}>
+          <div className={classes.root}>
+            <CssBaseline />
+            <AppBar elevation={0}>
+              <Toolbar>
+                <IconButton
+                  aria-label="open drawer"
+                  className={clsx(classes.menuButton)}
+                  color="inherit"
+                  edge="start"
+                  onClick={() => this._handleToggle()}
+                >
+                  <MenuIcon />
+                </IconButton>
+                <img
+                  alt="Application Logo"
+                  className={classes.logo}
+                  src="../logo.png"
+                />
+              </Toolbar>
+            </AppBar>
 
-          <Drawer
-            classes={{
-              paper: clsx(
-                classes.drawer,
-                !this.state.open && classes.drawerClose
-              ),
-            }}
-            open={this.state.open}
-            variant="permanent"
-          >
-            {this._getDrawerContent(classes)}
-          </Drawer>
+            <Drawer
+              classes={{
+                paper: clsx(
+                  classes.drawer,
+                  !this.state.open && classes.drawerClose
+                ),
+              }}
+              open={this.state.open}
+              variant="permanent"
+            >
+              <List component="nav" aria-label="main application navigation">
+                {this._getDrawerContent()}
+              </List>
+            </Drawer>
 
-          <main className={classes.content}>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/template" component={Template} />
-            </Switch>
-          </main>
-        </div>
+            <main className={classes.content}>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/template" component={Template} />
+              </Switch>
+            </main>
+          </div>
+        </MuiThemeProvider>
       </Router>
     );
   }
