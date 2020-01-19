@@ -7,6 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+import Input from '@material-ui/core/Input';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -141,54 +142,6 @@ class App extends React.Component {
   };
 
   /**
-   * Get Drawer Content
-   * @return {jsx}
-   */
-  _getDrawerContent = () => {
-    return primaryNavigation.map((item, index) => (
-      <React.Fragment key={item.page}>
-        <ListItem
-          button
-          component={Link}
-          onClick={() => this._handleListItemClick(index)}
-          selected={this.state.selectedIndex === index}
-          to={item.component}
-        >
-          <ListItemIcon
-            style={{
-              color: this.state.selectedIndex === index ? '#fff' : '#909090',
-            }}
-          >
-            {item.icon}
-          </ListItemIcon>
-          <ListItemText primary={item.page} />
-        </ListItem>
-
-        <Divider
-          style={{
-            display: index === 2 || index === 6 ? 'block' : 'none',
-          }}
-        />
-      </React.Fragment>
-    ));
-  };
-
-  /**
-   * Handle List Item Click
-   * @param {number} index
-   */
-  _handleListItemClick = (index) => {
-    this.setState({selectedIndex: index});
-  };
-
-  /**
-   * Handle Toggle
-   */
-  _handleToggle = () => {
-    this.setState({open: !this.state.open});
-  };
-
-  /**
    * Render
    * @return {jsx}
    */
@@ -245,6 +198,54 @@ class App extends React.Component {
       </Router>
     );
   }
+
+  /**
+   * Get Drawer Content
+   * @return {jsx}
+   */
+  _getDrawerContent = () => {
+    return primaryNavigation.map((item, index) => (
+      <React.Fragment key={item.page}>
+        <ListItem
+          button
+          component={Link}
+          onClick={() => this._handleListItemClick(index)}
+          selected={this.state.selectedIndex === index}
+          to={item.component}
+        >
+          <ListItemIcon
+            style={{
+              color: this.state.selectedIndex === index ? '#fff' : '#909090',
+            }}
+          >
+            {item.icon}
+          </ListItemIcon>
+          <ListItemText primary={item.page} />
+        </ListItem>
+
+        <Divider
+          style={{
+            display: index === 2 || index === 6 ? 'block' : 'none',
+          }}
+        />
+      </React.Fragment>
+    ));
+  };
+
+  /**
+   * Handle List Item Click
+   * @param {number} index
+   */
+  _handleListItemClick = (index) => {
+    this.setState({selectedIndex: index});
+  };
+
+  /**
+   * Handle Toggle
+   */
+  _handleToggle = () => {
+    this.setState({open: !this.state.open});
+  };
 }
 
 export default withStyles(styles)(App);
