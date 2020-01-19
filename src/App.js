@@ -51,7 +51,12 @@ const theme = createMuiTheme({
       root: {
         color: '#fff',
         height: 40,
-        '&$selected': {backgroundColor: '#3e3e3e'},
+        '&$selected': {
+          backgroundColor: '#3e3e3e',
+        },
+        '&$selected:hover': {
+          backgroundColor: '#525252',
+        },
       },
       button: {
         '&:hover': {
