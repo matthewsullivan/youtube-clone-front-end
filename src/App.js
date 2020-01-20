@@ -3,18 +3,20 @@ import React from 'react';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 
 import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Input from '@material-ui/core/Input';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import TextField from '@material-ui/core/TextField';
 import Toolbar from '@material-ui/core/Toolbar';
 
 import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
 
 import {
   MuiThemeProvider,
@@ -36,10 +38,32 @@ const toolBarHeight = 56;
 
 const theme = createMuiTheme({
   overrides: {
+    MuiButton: {
+      root: {
+        borderRadius: 0,
+        height: '32px',
+      },
+      contained: {
+        backgroundColor: '#383838',
+        color: '#747474',
+        '&:hover': {
+          backgroundColor: '#3e3e3e',
+          color: '#9c9c9c',
+        },
+      },
+    },
     MuiDivider: {
       root: {
         backgroundColor: '#3e3e3e',
         margin: '12px 0',
+      },
+    },
+    MuiFormControl: {
+      marginDense: {
+        marginBottom: 0,
+        marginTop: 0,
+        width: '100%',
+        maxWidth: '576px',
       },
     },
     MuiList: {
@@ -76,6 +100,24 @@ const theme = createMuiTheme({
       primary: {
         fontSize: '0.85rem',
         letterSpacing: '0.015em;',
+      },
+    },
+    MuiOutlinedInput: {
+      root: {
+        background: '#121212',
+        borderRadius: 0,
+        height: '32px',
+      },
+      input: {
+        color: '#fff',
+        '&::placeholder': {
+          color: '#fff',
+          fontSize: '1rem',
+          fontWeight: 400,
+        },
+      },
+      notchedOutline: {
+        borderColor: '#383838',
       },
     },
     MuiToolbar: {
@@ -122,6 +164,7 @@ const styles = (theme) => ({
   },
 
   logo: {
+    marginRight: '15.5%',
     width: 80,
   },
 
@@ -169,6 +212,14 @@ class App extends React.Component {
                   className={classes.logo}
                   src="../logo.png"
                 />
+                <TextField
+                  placeholder="Search"
+                  margin="dense"
+                  variant="outlined"
+                />
+                <Button disableElevation variant="contained">
+                  <SearchIcon fontSize="small" />
+                </Button>
               </Toolbar>
             </AppBar>
 
