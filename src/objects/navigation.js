@@ -1,14 +1,24 @@
 import React from 'react';
 
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import CameraIcon from '@material-ui/icons/Camera';
 import FeedbackIcon from '@material-ui/icons/Feedback';
 import FlagIcon from '@material-ui/icons/Flag';
 import HelpIcon from '@material-ui/icons/Help';
 import HistoryIcon from '@material-ui/icons/History';
 import HomeIcon from '@material-ui/icons/Home';
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
+import LoyaltyIcon from '@material-ui/icons/Loyalty';
+import ReceiptIcon from '@material-ui/icons/Receipt';
 import SettingsIcon from '@material-ui/icons/Settings';
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
+import SurroundSoundIcon from '@material-ui/icons/SurroundSound';
+import SportsSoccerIcon from '@material-ui/icons/SportsSoccer';
+import VideogameAssetIcon from '@material-ui/icons/VideogameAsset';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
+import TheatersIcon from '@material-ui/icons/Theaters';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
+import YouTubeIcon from '@material-ui/icons/YouTube';
 
 const Items = [
   {
@@ -39,62 +49,62 @@ const Items = [
   {
     component: '',
     page: 'Music',
-    icon: <SettingsIcon fontSize="small" />,
+    icon: <MusicNoteIcon fontSize="small" />,
   },
   {
     component: '',
     page: 'Sports',
-    icon: <SettingsIcon fontSize="small" />,
+    icon: <SportsSoccerIcon fontSize="small" />,
   },
   {
     component: '',
     page: 'Gaming',
-    icon: <SettingsIcon fontSize="small" />,
+    icon: <VideogameAssetIcon fontSize="small" />,
   },
   {
     component: '',
     page: 'Movies',
-    icon: <SettingsIcon fontSize="small" />,
+    icon: <TheatersIcon fontSize="small" />,
   },
   {
     component: '',
     page: 'TV Shows',
-    icon: <SettingsIcon fontSize="small" />,
+    icon: <TheatersIcon fontSize="small" />,
   },
   {
     component: '',
     page: 'News',
-    icon: <SettingsIcon fontSize="small" />,
+    icon: <ReceiptIcon fontSize="small" />,
   },
   {
     component: '',
     page: 'Live',
-    icon: <SettingsIcon fontSize="small" />,
+    icon: <SurroundSoundIcon fontSize="small" />,
   },
   {
     component: '',
     page: 'Fashion',
-    icon: <SettingsIcon fontSize="small" />,
+    icon: <LoyaltyIcon fontSize="small" />,
   },
   {
     component: '',
     page: '360° Video',
-    icon: <SettingsIcon fontSize="small" />,
+    icon: <CameraIcon fontSize="small" />,
   },
   {
     component: '',
     page: 'Browse Channels',
-    icon: <SettingsIcon fontSize="small" />,
+    icon: <AddCircleIcon />,
   },
   {
     component: '',
     page: 'YouTube Premium',
-    icon: <SettingsIcon fontSize="small" />,
+    icon: <YouTubeIcon fontSize="small" />,
   },
   {
     component: '',
     page: 'Live',
-    icon: <SettingsIcon fontSize="small" />,
+    icon: <SurroundSoundIcon fontSize="small" />,
   },
   {
     component: '',
