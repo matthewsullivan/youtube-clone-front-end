@@ -225,6 +225,10 @@ const styles = (theme) => ({
     height: 40,
     padding: '2px 12px',
   },
+
+  signInMessage: {
+    paddingBottom: 8,
+  },
 });
 
 class App extends React.Component {
@@ -385,7 +389,11 @@ class App extends React.Component {
                       }}
                     >
                       <div className={classes.signIn}>
-                        <Typography gutterBottom variant="subtitle2">
+                        <Typography
+                          className={classes.signInMessage}
+                          gutterBottom
+                          variant="subtitle2"
+                        >
                           Sign in to like videos, comment, and subscribe.
                         </Typography>
                         <Button
