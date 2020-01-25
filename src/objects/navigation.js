@@ -10,7 +10,7 @@ import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 
-const primaryNavigation = [
+const Items = [
   {
     component: '',
     page: 'Home',
@@ -38,6 +38,51 @@ const primaryNavigation = [
   },
   {
     component: '',
+    page: 'Music',
+    icon: <SettingsIcon fontSize="small" />,
+  },
+  {
+    component: '',
+    page: 'Sports',
+    icon: <SettingsIcon fontSize="small" />,
+  },
+  {
+    component: '',
+    page: 'Gaming',
+    icon: <SettingsIcon fontSize="small" />,
+  },
+  {
+    component: '',
+    page: 'Movies',
+    icon: <SettingsIcon fontSize="small" />,
+  },
+  {
+    component: '',
+    page: 'TV Shows',
+    icon: <SettingsIcon fontSize="small" />,
+  },
+  {
+    component: '',
+    page: 'News',
+    icon: <SettingsIcon fontSize="small" />,
+  },
+  {
+    component: '',
+    page: 'Live',
+    icon: <SettingsIcon fontSize="small" />,
+  },
+  {
+    component: '',
+    page: 'Fashion',
+    icon: <SettingsIcon fontSize="small" />,
+  },
+  {
+    component: '',
+    page: '360° Video',
+    icon: <SettingsIcon fontSize="small" />,
+  },
+  {
+    component: '',
     page: 'Settings',
     icon: <SettingsIcon fontSize="small" />,
   },
@@ -58,4 +103,4 @@ const primaryNavigation = [
   },
 ];
 
-export {primaryNavigation as default};
+export {Items as default};

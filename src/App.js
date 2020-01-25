@@ -34,7 +34,7 @@ import PropTypes from 'prop-types';
 
 import Home from './components/Home';
 import Template from './components/Template';
-import primaryNavigation from './objects/navigation';
+import Items from './objects/navigation';
 
 const drawerWidth = 240;
 const primaryColor = '#272727';
@@ -187,6 +187,11 @@ const styles = (theme) => ({
     marginRight: 12,
   },
 
+  signIn: {
+    padding: '0 32px',
+    whiteSpace: 'pre-line',
+  },
+
   signInButton: {
     borderRadius: 2,
     color: '#3ea6ff',
@@ -311,7 +316,7 @@ class App extends React.Component {
               variant="permanent"
             >
               <List aria-label="main application navigation" component="nav">
-                {this._getDrawerContent()}
+                {this._getDrawerContent(classes)}
               </List>
             </Drawer>
 
@@ -329,10 +334,11 @@ class App extends React.Component {
 
   /**
    * Get Drawer Content
+   * @param {object} classes
    * @return {jsx}
    */
-  _getDrawerContent = () => {
-    return primaryNavigation.map((item, index) => (
+  _getDrawerContent = (classes) => {
+    return Items.map((item, index) => (
       <React.Fragment key={item.page}>
         <ListItem
           button
@@ -354,6 +360,34 @@ class App extends React.Component {
         <Divider
           style={{
             display: index === 2 || index === 4 ? 'block' : 'none',
+          }}
+        />
+
+        <div
+          style={{
+            display: index === 4 ? 'block' : 'none',
+          }}
+        >
+          <div className={clsx(classes.signIn)}>
+            <p>Sign in to like videos, comment, and subscribe.</p>
+            <Button
+              className={clsx(classes.signInButton)}
+              color="primary"
+              size="large"
+              startIcon={<AccountCircleIcon />}
+              variant="outlined"
+            >
+              Sign In
+            </Button>
+          </div>
+
+          <Divider />
+
+          <p>Best of Youtube</p>
+        </div>
+        <Divider
+          style={{
+            display: index === 13 ? 'block' : 'none',
           }}
         />
       </React.Fragment>
