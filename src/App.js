@@ -214,6 +214,14 @@ const styles = (theme) => ({
     marginRight: 12,
   },
 
+  sideBarSmall: {
+    height: 72,
+  },
+
+  sideBarSmallText: {
+    fontSize: '10px',
+  },
+
   signIn: {
     padding: '6px 32px',
     whiteSpace: 'pre-line',
@@ -346,7 +354,13 @@ class App extends React.Component {
               open={this.state.open}
               variant="permanent"
             >
-              <List aria-label="main application navigation" component="nav">
+              <List
+                aria-label="main application navigation"
+                component="nav"
+                style={{
+                  display: this.state.open ? 'block' : 'none',
+                }}
+              >
                 {Navigation.map((item, index) => (
                   <React.Fragment key={index}>
                     <ListItem
@@ -454,6 +468,64 @@ class App extends React.Component {
                     © 2020 Google LLC
                   </Typography>
                 </Grid>
+              </List>
+
+              <List
+                aria-label="main application mobile navigation"
+                component="nav"
+                style={{
+                  display: !this.state.open ? 'block' : 'none',
+                }}
+              >
+                {Navigation.map((item, index) => (
+                  <React.Fragment key={index}>
+                    <ListItem
+                      button
+                      className={classes.sideBarSmall}
+                      component={Link}
+                      onClick={() => this._handleListItemClick(index)}
+                      style={{
+                        display: index < 5 ? 'block' : 'none',
+                      }}
+                      to={item.path}
+                    >
+                      <Grid
+                        alignItems="center"
+                        container
+                        direction="column"
+                        justify="center"
+                      >
+                        <Grid item>
+                          <ListItemIcon
+                            style={{
+                              color:
+                                this.state.selectedIndex === index
+                                  ? '#fff'
+                                  : '#909090',
+                            }}
+                          >
+                            {item.icon}
+                          </ListItemIcon>
+                        </Grid>
+
+                        <Grid item>
+                          <Typography
+                            className={classes.sideBarSmallText}
+                            style={{
+                              color:
+                                this.state.selectedIndex === index
+                                  ? '#fff'
+                                  : '#909090',
+                            }}
+                            variant="caption"
+                          >
+                            {item.page}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </ListItem>
+                  </React.Fragment>
+                ))}
               </List>
             </Drawer>
 
