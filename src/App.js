@@ -35,7 +35,7 @@ import PropTypes from 'prop-types';
 
 import Home from './components/Home';
 import Template from './components/Template';
-import Items from './objects/navigation';
+import {Footer, Navigation} from './objects/navigation';
 
 const drawerWidth = 240;
 const primaryColor = '#272727';
@@ -161,6 +161,11 @@ const styles = (theme) => ({
     paddingTop: toolBarHeight,
   },
 
+  copyright: {
+    color: '#717171',
+    marginTop: 32,
+  },
+
   drawer: {
     background: primaryColor,
     color: '#fff',
@@ -187,6 +192,19 @@ const styles = (theme) => ({
     textTransform: 'uppercase',
   },
 
+  footer: {
+    padding: '8px 24px',
+  },
+
+  footerLink: {
+    color: '#aaa',
+    fontSize: '13px',
+    fontWeight: 600,
+    lineHeight: '1.2rem',
+    marginRight: 8,
+    textDecoration: 'none',
+  },
+
   logo: {
     marginBottom: -5,
     width: 80,
@@ -197,7 +215,7 @@ const styles = (theme) => ({
   },
 
   signIn: {
-    padding: '0 32px',
+    padding: '6px 32px',
     whiteSpace: 'pre-line',
   },
 
@@ -238,7 +256,7 @@ class App extends React.Component {
                   <Grid item>
                     <IconButton
                       aria-label="open drawer"
-                      className={clsx(classes.menuButton)}
+                      className={classes.menuButton}
                       color="inherit"
                       edge="start"
                       onClick={() => this._handleToggle()}
@@ -299,7 +317,7 @@ class App extends React.Component {
                       </Grid>
                       <Grid item>
                         <Button
-                          className={clsx(classes.signInButton)}
+                          className={classes.signInButton}
                           color="primary"
                           size="large"
                           startIcon={<AccountCircleIcon />}
@@ -325,7 +343,109 @@ class App extends React.Component {
               variant="permanent"
             >
               <List aria-label="main application navigation" component="nav">
-                {this._getDrawerContent(classes)}
+                {Navigation.map((item, index) => (
+                  <React.Fragment key={index}>
+                    <ListItem
+                      button
+                      component={Link}
+                      onClick={() => this._handleListItemClick(index)}
+                      selected={this.state.selectedIndex === index}
+                      to={item.path}
+                    >
+                      <ListItemIcon
+                        style={{
+                          color:
+                            this.state.selectedIndex === index
+                              ? '#fff'
+                              : '#909090',
+                        }}
+                      >
+                        {item.icon}
+                      </ListItemIcon>
+                      <ListItemText primary={item.page} />
+                    </ListItem>
+
+                    <Divider
+                      style={{
+                        display:
+                          index === 2 ||
+                          index === 4 ||
+                          index === 13 ||
+                          index === 14 ||
+                          index === 16 ||
+                          index === 20
+                            ? 'block'
+                            : 'none',
+                      }}
+                    />
+
+                    <div
+                      style={{
+                        display: index === 4 ? 'block' : 'none',
+                      }}
+                    >
+                      <div className={classes.signIn}>
+                        <Typography gutterBottom variant="subtitle2">
+                          Sign in to like videos, comment, and subscribe.
+                        </Typography>
+                        <Button
+                          className={classes.signInButton}
+                          color="primary"
+                          size="large"
+                          startIcon={<AccountCircleIcon />}
+                          variant="outlined"
+                        >
+                          Sign In
+                        </Button>
+                      </div>
+                      <Divider />
+                      <Typography
+                        className={classes.drawerTitle}
+                        gutterBottom
+                        variant="subtitle1"
+                      >
+                        Best of Youtube
+                      </Typography>
+                    </div>
+
+                    <Typography
+                      className={classes.drawerTitle}
+                      gutterBottom
+                      style={{
+                        display: index === 14 ? 'block' : 'none',
+                      }}
+                      variant="subtitle1"
+                    >
+                      More From YouTube
+                    </Typography>
+                  </React.Fragment>
+                ))}
+
+                <Grid
+                  alignItems="flex-start"
+                  className={classes.footer}
+                  container
+                  direction="row"
+                  justify="flex-start"
+                >
+                  {Footer.map((item, index) => (
+                    <React.Fragment key={index}>
+                      <Grid item>
+                        <Link
+                          className={classes.footerLink}
+                          href={item.path}
+                          onClick={this.preventDefault}
+                          to={item.path}
+                        >
+                          {item.page}
+                        </Link>
+                      </Grid>
+                    </React.Fragment>
+                  ))}
+                  <Typography className={classes.copyright} variant="caption">
+                    © 2020 Google LLC
+                  </Typography>
+                </Grid>
               </List>
             </Drawer>
 
@@ -340,89 +460,6 @@ class App extends React.Component {
       </Router>
     );
   }
-
-  /**
-   * Get Drawer Content
-   * @param {object} classes
-   * @return {jsx}
-   */
-  _getDrawerContent = (classes) => {
-    return Items.map((item, index) => (
-      <React.Fragment key={item.index}>
-        <ListItem
-          button
-          component={Link}
-          onClick={() => this._handleListItemClick(index)}
-          selected={this.state.selectedIndex === index}
-          to={item.component}
-        >
-          <ListItemIcon
-            style={{
-              color: this.state.selectedIndex === index ? '#fff' : '#909090',
-            }}
-          >
-            {item.icon}
-          </ListItemIcon>
-          <ListItemText primary={item.page} />
-        </ListItem>
-
-        <Divider
-          style={{
-            display:
-              index === 2 ||
-              index === 4 ||
-              index === 13 ||
-              index === 14 ||
-              index === 16
-                ? 'block'
-                : 'none',
-          }}
-        />
-
-        <div
-          style={{
-            display: index === 4 ? 'block' : 'none',
-          }}
-        >
-          <div className={clsx(classes.signIn)}>
-            <Typography gutterBottom variant="subtitle2">
-              Sign in to like videos, comment, and subscribe.
-            </Typography>
-            <Button
-              className={clsx(classes.signInButton)}
-              color="primary"
-              size="large"
-              startIcon={<AccountCircleIcon />}
-              variant="outlined"
-            >
-              Sign In
-            </Button>
-          </div>
-
-          <Divider />
-
-          <Typography
-            className={clsx(classes.drawerTitle)}
-            gutterBottom
-            variant="subtitle1"
-          >
-            Best of Youtube
-          </Typography>
-        </div>
-
-        <Typography
-          className={clsx(classes.drawerTitle)}
-          gutterBottom
-          style={{
-            display: index === 14 ? 'block' : 'none',
-          }}
-          variant="subtitle1"
-        >
-          More From YouTube
-        </Typography>
-      </React.Fragment>
-    ));
-  };
 
   /**
    * Handle List Item Click
