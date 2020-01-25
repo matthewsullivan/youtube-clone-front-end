@@ -83,6 +83,21 @@ const Items = [
   },
   {
     component: '',
+    page: 'Browse Channels',
+    icon: <SettingsIcon fontSize="small" />,
+  },
+  {
+    component: '',
+    page: 'YouTube Premium',
+    icon: <SettingsIcon fontSize="small" />,
+  },
+  {
+    component: '',
+    page: 'Live',
+    icon: <SettingsIcon fontSize="small" />,
+  },
+  {
+    component: '',
     page: 'Settings',
     icon: <SettingsIcon fontSize="small" />,
   },

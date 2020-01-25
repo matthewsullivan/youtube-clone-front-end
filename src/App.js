@@ -14,6 +14,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 
 import AppsIcon from '@material-ui/icons/Apps';
@@ -178,6 +179,14 @@ const styles = (theme) => ({
     },
   },
 
+  drawerTitle: {
+    color: '#aaa',
+    fontSize: '14px',
+    fontWeight: 500,
+    padding: '0 24px',
+    textTransform: 'uppercase',
+  },
+
   logo: {
     marginBottom: -5,
     width: 80,
@@ -339,7 +348,7 @@ class App extends React.Component {
    */
   _getDrawerContent = (classes) => {
     return Items.map((item, index) => (
-      <React.Fragment key={item.page}>
+      <React.Fragment key={item.index}>
         <ListItem
           button
           component={Link}
@@ -359,7 +368,14 @@ class App extends React.Component {
 
         <Divider
           style={{
-            display: index === 2 || index === 4 ? 'block' : 'none',
+            display:
+              index === 2 ||
+              index === 4 ||
+              index === 13 ||
+              index === 14 ||
+              index === 16
+                ? 'block'
+                : 'none',
           }}
         />
 
@@ -369,7 +385,9 @@ class App extends React.Component {
           }}
         >
           <div className={clsx(classes.signIn)}>
-            <p>Sign in to like videos, comment, and subscribe.</p>
+            <Typography gutterBottom variant="subtitle2">
+              Sign in to like videos, comment, and subscribe.
+            </Typography>
             <Button
               className={clsx(classes.signInButton)}
               color="primary"
@@ -383,13 +401,25 @@ class App extends React.Component {
 
           <Divider />
 
-          <p>Best of Youtube</p>
+          <Typography
+            className={clsx(classes.drawerTitle)}
+            gutterBottom
+            variant="subtitle1"
+          >
+            Best of Youtube
+          </Typography>
         </div>
-        <Divider
+
+        <Typography
+          className={clsx(classes.drawerTitle)}
+          gutterBottom
           style={{
-            display: index === 13 ? 'block' : 'none',
+            display: index === 14 ? 'block' : 'none',
           }}
-        />
+          variant="subtitle1"
+        >
+          More From YouTube
+        </Typography>
       </React.Fragment>
     ));
   };
