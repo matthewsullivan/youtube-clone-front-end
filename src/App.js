@@ -276,11 +276,17 @@ class App extends React.Component {
                     >
                       <MenuIcon />
                     </IconButton>
-                    <img
-                      alt="Application Logo"
-                      className={classes.logo}
-                      src="../logo.png"
-                    />
+                    <Link
+                      href="/"
+                      onClick={() => this._handleListItemClick()}
+                      to="/"
+                    >
+                      <img
+                        alt="Application Logo"
+                        className={classes.logo}
+                        src="../logo.png"
+                      />
+                    </Link>
                   </Grid>
                   <Grid item xs={6}>
                     <Grid
@@ -547,7 +553,7 @@ class App extends React.Component {
    * @param {number} index
    */
   _handleListItemClick = (index) => {
-    this.setState({selectedIndex: index});
+    this.setState({selectedIndex: index || 0});
   };
 
   /**
