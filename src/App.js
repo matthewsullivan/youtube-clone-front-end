@@ -252,20 +252,6 @@ class App extends React.Component {
   };
 
   /**
-   * Component Did Mount
-   */
-  componentDidMount() {
-    window.addEventListener('resize', this._handleResize);
-  }
-
-  /**
-   * Component Did Unmount
-   */
-  componentWillUnmount() {
-    window.removeEventListener('resize', this._handleResize);
-  }
-
-  /**
    * Render
    * @return {jsx}
    */
@@ -568,15 +554,6 @@ class App extends React.Component {
    */
   _handleListItemClick = (index) => {
     this.setState({selectedIndex: index || 0});
-  };
-
-  /**
-   * Handle Resize
-   */
-  _handleResize = () => {
-    if (window.innerWidth < 1200) {
-      this.setState({open: false});
-    }
   };
 
   /**
