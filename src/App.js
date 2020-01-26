@@ -47,7 +47,7 @@ const theme = createMuiTheme({
     MuiButton: {
       root: {
         borderRadius: 0,
-        height: '32px',
+        height: 32,
       },
 
       contained: {
@@ -72,7 +72,7 @@ const theme = createMuiTheme({
         marginBottom: 0,
         marginTop: 0,
         width: '100%',
-        maxWidth: '576px',
+        maxWidth: 576,
       },
     },
 
@@ -104,8 +104,8 @@ const theme = createMuiTheme({
     MuiListItemIcon: {
       root: {
         color: '#909090',
-        marginLeft: '8px',
-        minWidth: '48px',
+        marginLeft: 8,
+        minWidth: 48,
       },
     },
 
@@ -120,7 +120,7 @@ const theme = createMuiTheme({
       root: {
         background: '#121212',
         borderRadius: 0,
-        height: '32px',
+        height: 32,
       },
       input: {
         color: '#fff',
@@ -171,7 +171,7 @@ const styles = (theme) => ({
     color: '#fff',
     height: `calc(100vh - ${toolBarHeight}px)`,
     position: 'relative',
-    paddingTop: '12px',
+    paddingTop: 12,
     top: toolBarHeight,
     whiteSpace: 'nowrap',
     width: drawerWidth,
@@ -186,7 +186,7 @@ const styles = (theme) => ({
 
   drawerTitle: {
     color: '#aaa',
-    fontSize: '14px',
+    fontSize: 14,
     fontWeight: 500,
     padding: '0 24px',
     textTransform: 'uppercase',
@@ -198,7 +198,7 @@ const styles = (theme) => ({
 
   footerLink: {
     color: '#aaa',
-    fontSize: '13px',
+    fontSize: 13,
     fontWeight: 600,
     lineHeight: '1.2rem',
     marginRight: 8,
@@ -219,7 +219,8 @@ const styles = (theme) => ({
   },
 
   sideBarSmallText: {
-    fontSize: '10px',
+    fontSize: 10,
+    marginLeft: -16,
   },
 
   signIn: {

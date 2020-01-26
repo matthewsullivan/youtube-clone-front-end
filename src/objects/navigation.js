@@ -7,16 +7,16 @@ import FlagIcon from '@material-ui/icons/Flag';
 import HelpIcon from '@material-ui/icons/Help';
 import HistoryIcon from '@material-ui/icons/History';
 import HomeIcon from '@material-ui/icons/Home';
-import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import SettingsIcon from '@material-ui/icons/Settings';
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 import SurroundSoundIcon from '@material-ui/icons/SurroundSound';
 import SportsSoccerIcon from '@material-ui/icons/SportsSoccer';
+import TheatersIcon from '@material-ui/icons/Theaters';
 import VideogameAssetIcon from '@material-ui/icons/VideogameAsset';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
-import TheatersIcon from '@material-ui/icons/Theaters';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 
