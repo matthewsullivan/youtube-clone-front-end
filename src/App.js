@@ -16,6 +16,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import AppsIcon from '@material-ui/icons/Apps';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -36,7 +37,6 @@ import Home from './components/Home';
 import Template from './components/Template';
 import {Footer, Navigation} from './objects/navigation';
 
-const drawerWidth = 240;
 const primaryColor = '#272727';
 const secondaryColor = '#1e1e1e';
 const toolBarHeight = 56;
@@ -173,14 +173,19 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 12,
     top: toolBarHeight,
     whiteSpace: 'nowrap',
-    width: drawerWidth,
-  },
-
-  drawerClose: {
-    width: theme.spacing(7),
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('lg')]: {
+      width: 240,
+    },
+    [theme.breakpoints.down('md')]: {
       width: theme.spacing(9),
     },
+    [theme.breakpoints.down('sm')]: {
+      width: 0,
+    },
+  },
+
+  drawerNarrow: {
+    width: theme.spacing(9),
   },
 
   drawerTitle: {
@@ -244,6 +249,7 @@ export default function App() {
   const [selectedIndex, setIndex] = React.useState(0);
 
   const classes = useStyles();
+  const screenNarrow = useMediaQuery(theme.breakpoints.down('md'));
 
   /**
    * Handle List Item Click
@@ -351,7 +357,7 @@ export default function App() {
 
           <Drawer
             classes={{
-              paper: clsx(classes.drawer, !open && classes.drawerClose),
+              paper: clsx(classes.drawer, !open && classes.drawerNarrow),
             }}
             open={open}
             variant="permanent"
@@ -360,7 +366,7 @@ export default function App() {
               aria-label="main application navigation"
               component="nav"
               style={{
-                display: open ? 'block' : 'none',
+                display: open && !screenNarrow ? 'block' : 'none',
               }}
             >
               {Navigation.map((item, index) => (
@@ -472,7 +478,7 @@ export default function App() {
               aria-label="main application mobile navigation"
               component="nav"
               style={{
-                display: !open ? 'block' : 'none',
+                display: !open || screenNarrow ? 'block' : 'none',
               }}
             >
               {Navigation.map((item, index) => (
