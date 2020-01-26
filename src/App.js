@@ -16,6 +16,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import AppsIcon from '@material-ui/icons/Apps';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -36,7 +37,6 @@ import Home from './components/Home';
 import Template from './components/Template';
 import {Footer, Navigation} from './objects/navigation';
 
-const drawerWidth = 240;
 const primaryColor = '#272727';
 const secondaryColor = '#1e1e1e';
 const toolBarHeight = 56;
@@ -173,14 +173,28 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 12,
     top: toolBarHeight,
     whiteSpace: 'nowrap',
-    width: drawerWidth,
-  },
-
-  drawerClose: {
-    width: theme.spacing(7),
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('lg')]: {
+      width: 240,
+    },
+    [theme.breakpoints.down('md')]: {
       width: theme.spacing(9),
     },
+    [theme.breakpoints.down('sm')]: {
+      width: 0,
+    },
+  },
+
+  drawerNarrow: {
+    width: theme.spacing(9),
+  },
+
+  drawerMobile: {
+    background: primaryColor,
+    color: '#fff',
+    height: '100vh',
+    position: 'relative',
+    whiteSpace: 'nowrap',
+    width: 240,
   },
 
   drawerTitle: {
@@ -244,6 +258,148 @@ export default function App() {
   const [selectedIndex, setIndex] = React.useState(0);
 
   const classes = useStyles();
+  const screenNarrow = useMediaQuery(theme.breakpoints.down('md'));
+
+  /**
+   * Get Drawer Content
+   * @return {JSX}
+   */
+  const _getDrawerContent = () => {
+    return (
+      <>
+        {Navigation.map((item, index) => (
+          <React.Fragment key={index}>
+            <ListItem
+              button
+              component={Link}
+              onClick={() => _handleListItemClick(index)}
+              selected={selectedIndex === index}
+              to={item.path}
+            >
+              <ListItemIcon
+                style={{
+                  color: selectedIndex === index ? '#fff' : '#909090',
+                }}
+              >
+                {item.icon}
+              </ListItemIcon>
+              <ListItemText primary={item.page} />
+            </ListItem>
+
+            <Divider
+              style={{
+                display:
+                  index === 2 ||
+                  index === 4 ||
+                  index === 13 ||
+                  index === 14 ||
+                  index === 16 ||
+                  index === 20
+                    ? 'block'
+                    : 'none',
+              }}
+            />
+
+            <div
+              style={{
+                display: index === 4 ? 'block' : 'none',
+              }}
+            >
+              <div className={classes.signIn}>
+                <Typography
+                  className={classes.signInMessage}
+                  gutterBottom
+                  variant="subtitle2"
+                >
+                  Sign in to like videos, comment, and subscribe.
+                </Typography>
+                <Button
+                  className={classes.signInButton}
+                  color="primary"
+                  size="large"
+                  startIcon={<AccountCircleIcon />}
+                  variant="outlined"
+                >
+                  Sign In
+                </Button>
+              </div>
+              <Divider />
+              <Typography
+                className={classes.drawerTitle}
+                gutterBottom
+                variant="subtitle1"
+              >
+                Best of Youtube
+              </Typography>
+            </div>
+
+            <Typography
+              className={classes.drawerTitle}
+              gutterBottom
+              style={{
+                display: index === 14 ? 'block' : 'none',
+              }}
+              variant="subtitle1"
+            >
+              More From YouTube
+            </Typography>
+          </React.Fragment>
+        ))}
+
+        <Grid
+          alignItems="flex-start"
+          className={classes.footer}
+          container
+          direction="row"
+          justify="flex-start"
+        >
+          {Footer.map((item, index) => (
+            <React.Fragment key={index}>
+              <Grid item>
+                <Link
+                  className={classes.footerLink}
+                  href={item.path}
+                  to={item.path}
+                >
+                  {item.page}
+                </Link>
+              </Grid>
+            </React.Fragment>
+          ))}
+          <Typography className={classes.copyright} variant="caption">
+            © 2020 Google LLC
+          </Typography>
+        </Grid>
+      </>
+    );
+  };
+
+  /**
+   * Get Menu Button Logo
+   * @return {JSX}
+   */
+  const _getMenuButtonLogo = () => {
+    return (
+      <Grid item>
+        <IconButton
+          aria-label="open drawer"
+          className={classes.menuButton}
+          color="inherit"
+          edge="start"
+          onClick={_handleToggle}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Link href="/" onClick={() => _handleListItemClick(0)} to="/">
+          <img
+            alt="Application Logo"
+            className={classes.logo}
+            src="../logo.png"
+          />
+        </Link>
+      </Grid>
+    );
+  };
 
   /**
    * Handle List Item Click
@@ -268,24 +424,7 @@ export default function App() {
           <AppBar elevation={0}>
             <Toolbar>
               <Grid alignItems="center" container justify="space-between">
-                <Grid item>
-                  <IconButton
-                    aria-label="open drawer"
-                    className={classes.menuButton}
-                    color="inherit"
-                    edge="start"
-                    onClick={_handleToggle}
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                  <Link href="/" onClick={() => _handleListItemClick(0)} to="/">
-                    <img
-                      alt="Application Logo"
-                      className={classes.logo}
-                      src="../logo.png"
-                    />
-                  </Link>
-                </Grid>
+                {_getMenuButtonLogo()}
                 <Grid item xs={6}>
                   <Grid
                     container
@@ -351,7 +490,28 @@ export default function App() {
 
           <Drawer
             classes={{
-              paper: clsx(classes.drawer, !open && classes.drawerClose),
+              paper: clsx(classes.drawerMobile),
+            }}
+            open={!open && screenNarrow}
+          >
+            <Toolbar>
+              <Grid alignItems="center" container justify="space-between">
+                {_getMenuButtonLogo()}
+              </Grid>
+            </Toolbar>
+
+            <Divider
+              style={{
+                marginTop: 0,
+              }}
+            />
+
+            {_getDrawerContent()}
+          </Drawer>
+
+          <Drawer
+            classes={{
+              paper: clsx(classes.drawer, !open && classes.drawerNarrow),
             }}
             open={open}
             variant="permanent"
@@ -360,119 +520,16 @@ export default function App() {
               aria-label="main application navigation"
               component="nav"
               style={{
-                display: open ? 'block' : 'none',
+                display: open && !screenNarrow ? 'block' : 'none',
               }}
             >
-              {Navigation.map((item, index) => (
-                <React.Fragment key={index}>
-                  <ListItem
-                    button
-                    component={Link}
-                    onClick={() => _handleListItemClick(index)}
-                    selected={selectedIndex === index}
-                    to={item.path}
-                  >
-                    <ListItemIcon
-                      style={{
-                        color: selectedIndex === index ? '#fff' : '#909090',
-                      }}
-                    >
-                      {item.icon}
-                    </ListItemIcon>
-                    <ListItemText primary={item.page} />
-                  </ListItem>
-
-                  <Divider
-                    style={{
-                      display:
-                        index === 2 ||
-                        index === 4 ||
-                        index === 13 ||
-                        index === 14 ||
-                        index === 16 ||
-                        index === 20
-                          ? 'block'
-                          : 'none',
-                    }}
-                  />
-
-                  <div
-                    style={{
-                      display: index === 4 ? 'block' : 'none',
-                    }}
-                  >
-                    <div className={classes.signIn}>
-                      <Typography
-                        className={classes.signInMessage}
-                        gutterBottom
-                        variant="subtitle2"
-                      >
-                        Sign in to like videos, comment, and subscribe.
-                      </Typography>
-                      <Button
-                        className={classes.signInButton}
-                        color="primary"
-                        size="large"
-                        startIcon={<AccountCircleIcon />}
-                        variant="outlined"
-                      >
-                        Sign In
-                      </Button>
-                    </div>
-                    <Divider />
-                    <Typography
-                      className={classes.drawerTitle}
-                      gutterBottom
-                      variant="subtitle1"
-                    >
-                      Best of Youtube
-                    </Typography>
-                  </div>
-
-                  <Typography
-                    className={classes.drawerTitle}
-                    gutterBottom
-                    style={{
-                      display: index === 14 ? 'block' : 'none',
-                    }}
-                    variant="subtitle1"
-                  >
-                    More From YouTube
-                  </Typography>
-                </React.Fragment>
-              ))}
-
-              <Grid
-                alignItems="flex-start"
-                className={classes.footer}
-                container
-                direction="row"
-                justify="flex-start"
-              >
-                {Footer.map((item, index) => (
-                  <React.Fragment key={index}>
-                    <Grid item>
-                      <Link
-                        className={classes.footerLink}
-                        href={item.path}
-                        to={item.path}
-                      >
-                        {item.page}
-                      </Link>
-                    </Grid>
-                  </React.Fragment>
-                ))}
-                <Typography className={classes.copyright} variant="caption">
-                  © 2020 Google LLC
-                </Typography>
-              </Grid>
+              {_getDrawerContent()}
             </List>
-
             <List
-              aria-label="main application mobile navigation"
+              aria-label="main application narrow navigation view"
               component="nav"
               style={{
-                display: !open ? 'block' : 'none',
+                display: !open || screenNarrow ? 'block' : 'none',
               }}
             >
               {Navigation.map((item, index) => (
