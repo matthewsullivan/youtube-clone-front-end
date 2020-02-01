@@ -66,15 +66,6 @@ const theme = createMuiTheme({
       },
     },
 
-    MuiFormControl: {
-      marginDense: {
-        marginBottom: 0,
-        marginTop: 0,
-        width: '100%',
-        maxWidth: 576,
-      },
-    },
-
     MuiList: {
       padding: {
         paddingBottom: 0,
@@ -173,14 +164,14 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 12,
     top: toolBarHeight,
     whiteSpace: 'nowrap',
-    [theme.breakpoints.up('lg')]: {
-      width: 240,
+    [theme.breakpoints.down('sm')]: {
+      width: 0,
     },
     [theme.breakpoints.down('md')]: {
       width: theme.spacing(9),
     },
-    [theme.breakpoints.down('sm')]: {
-      width: 0,
+    [theme.breakpoints.up('lg')]: {
+      width: 240,
     },
   },
 
@@ -227,6 +218,16 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 12,
   },
 
+  searchBar: {
+    marginBottom: 0,
+    marginTop: 0,
+    maxWidth: 576,
+    width: '50%',
+    [theme.breakpoints.up('md')]: {
+      width: '100%',
+    },
+  },
+
   sideBarSmall: {
     height: 72,
   },
@@ -259,6 +260,7 @@ export default function App() {
 
   const classes = useStyles();
   const screenNarrow = useMediaQuery(theme.breakpoints.down('md'));
+  const screenSmall = useMediaQuery('(max-width:664px)');
 
   /**
    * Get Drawer Content
@@ -287,24 +289,19 @@ export default function App() {
             </ListItem>
 
             <Divider
-              style={{
-                display:
-                  index === 2 ||
-                  index === 4 ||
-                  index === 13 ||
-                  index === 14 ||
-                  index === 16 ||
-                  index === 20
-                    ? 'block'
-                    : 'none',
-              }}
+              hidden={
+                index === 2 ||
+                index === 4 ||
+                index === 13 ||
+                index === 14 ||
+                index === 16 ||
+                index === 20
+                  ? false
+                  : true
+              }
             />
 
-            <div
-              style={{
-                display: index === 4 ? 'block' : 'none',
-              }}
-            >
+            <div hidden={index !== 4}>
               <div className={classes.signIn}>
                 <Typography
                   className={classes.signInMessage}
@@ -336,9 +333,7 @@ export default function App() {
             <Typography
               className={classes.drawerTitle}
               gutterBottom
-              style={{
-                display: index === 14 ? 'block' : 'none',
-              }}
+              hidden={index !== 14}
               variant="subtitle1"
             >
               More From YouTube
@@ -423,9 +418,14 @@ export default function App() {
           <CssBaseline />
           <AppBar elevation={0}>
             <Toolbar>
-              <Grid alignItems="center" container justify="space-between">
+              <Grid
+                alignItems="center"
+                container
+                justify="space-between"
+                wrap="nowrap"
+              >
                 {_getMenuButtonLogo()}
-                <Grid item xs={6}>
+                <Grid hidden={screenSmall} item md={6}>
                   <Grid
                     container
                     direction="row"
@@ -433,6 +433,7 @@ export default function App() {
                     wrap="nowrap"
                   >
                     <TextField
+                      className={classes.searchBar}
                       placeholder="Search"
                       margin="dense"
                       variant="outlined"
@@ -443,7 +444,16 @@ export default function App() {
                   </Grid>
                 </Grid>
                 <Grid item>
-                  <Grid alignItems="center" container>
+                  <Grid alignItems="center" container wrap="nowrap">
+                    <Grid hidden={!screenSmall} item>
+                      <IconButton
+                        aria-label="search"
+                        color="inherit"
+                        edge="start"
+                      >
+                        <SearchIcon />
+                      </IconButton>
+                    </Grid>
                     <Grid item>
                       <IconButton
                         aria-label="videos"
@@ -495,7 +505,12 @@ export default function App() {
             open={!open && screenNarrow}
           >
             <Toolbar>
-              <Grid alignItems="center" container justify="space-between">
+              <Grid
+                alignItems="center"
+                container
+                justify="space-between"
+                wrap="nowrap"
+              >
                 {_getMenuButtonLogo()}
               </Grid>
             </Toolbar>
@@ -519,18 +534,14 @@ export default function App() {
             <List
               aria-label="main application navigation"
               component="nav"
-              style={{
-                display: open && !screenNarrow ? 'block' : 'none',
-              }}
+              hidden={open && !screenNarrow ? false : true}
             >
               {_getDrawerContent()}
             </List>
             <List
               aria-label="main application narrow navigation view"
               component="nav"
-              style={{
-                display: !open || screenNarrow ? 'block' : 'none',
-              }}
+              hidden={!open || screenNarrow ? false : true}
             >
               {Navigation.map((item, index) => (
                 <React.Fragment key={index}>
@@ -538,10 +549,8 @@ export default function App() {
                     button
                     className={classes.sideBarSmall}
                     component={Link}
+                    style={{display: index < 5 ? 'block' : 'none'}}
                     onClick={() => _handleListItemClick(index)}
-                    style={{
-                      display: index < 5 ? 'block' : 'none',
-                    }}
                     to={item.path}
                   >
                     <Grid
