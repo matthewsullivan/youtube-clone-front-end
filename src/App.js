@@ -288,24 +288,19 @@ export default function App() {
             </ListItem>
 
             <Divider
-              style={{
-                display:
-                  index === 2 ||
-                  index === 4 ||
-                  index === 13 ||
-                  index === 14 ||
-                  index === 16 ||
-                  index === 20
-                    ? 'block'
-                    : 'none',
-              }}
+              hidden={
+                index === 2 ||
+                index === 4 ||
+                index === 13 ||
+                index === 14 ||
+                index === 16 ||
+                index === 20
+                  ? false
+                  : true
+              }
             />
 
-            <div
-              style={{
-                display: index === 4 ? 'block' : 'none',
-              }}
-            >
+            <div hidden={index !== 4}>
               <div className={classes.signIn}>
                 <Typography
                   className={classes.signInMessage}
@@ -337,9 +332,7 @@ export default function App() {
             <Typography
               className={classes.drawerTitle}
               gutterBottom
-              style={{
-                display: index === 14 ? 'block' : 'none',
-              }}
+              hidden={index !== 14}
               variant="subtitle1"
             >
               More From YouTube
@@ -538,18 +531,14 @@ export default function App() {
             <List
               aria-label="main application navigation"
               component="nav"
-              style={{
-                display: open && !screenNarrow ? 'block' : 'none',
-              }}
+              hidden={open && !screenNarrow ? false : true}
             >
               {_getDrawerContent()}
             </List>
             <List
               aria-label="main application narrow navigation view"
               component="nav"
-              style={{
-                display: !open || screenNarrow ? 'block' : 'none',
-              }}
+              hidden={!open || screenNarrow ? false : true}
             >
               {Navigation.map((item, index) => (
                 <React.Fragment key={index}>
@@ -557,10 +546,8 @@ export default function App() {
                     button
                     className={classes.sideBarSmall}
                     component={Link}
+                    style={{display: index < 5 ? 'block' : 'none'}}
                     onClick={() => _handleListItemClick(index)}
-                    style={{
-                      display: index < 5 ? 'block' : 'none',
-                    }}
                     to={item.path}
                   >
                     <Grid
