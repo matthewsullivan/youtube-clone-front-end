@@ -173,14 +173,14 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 12,
     top: toolBarHeight,
     whiteSpace: 'nowrap',
-    [theme.breakpoints.up('lg')]: {
-      width: 240,
+    [theme.breakpoints.down('sm')]: {
+      width: 0,
     },
     [theme.breakpoints.down('md')]: {
       width: theme.spacing(9),
     },
-    [theme.breakpoints.down('sm')]: {
-      width: 0,
+    [theme.breakpoints.up('lg')]: {
+      width: 240,
     },
   },
 
