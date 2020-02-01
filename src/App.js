@@ -66,15 +66,6 @@ const theme = createMuiTheme({
       },
     },
 
-    MuiFormControl: {
-      marginDense: {
-        marginBottom: 0,
-        marginTop: 0,
-        width: '100%',
-        maxWidth: 576,
-      },
-    },
-
     MuiList: {
       padding: {
         paddingBottom: 0,
@@ -225,6 +216,16 @@ const useStyles = makeStyles((theme) => ({
 
   menuButton: {
     marginRight: 12,
+  },
+
+  searchBar: {
+    marginBottom: 0,
+    marginTop: 0,
+    maxWidth: 576,
+    width: '50%',
+    [theme.breakpoints.up('md')]: {
+      width: '100%',
+    },
   },
 
   sideBarSmall: {
@@ -423,9 +424,14 @@ export default function App() {
           <CssBaseline />
           <AppBar elevation={0}>
             <Toolbar>
-              <Grid alignItems="center" container justify="space-between">
+              <Grid
+                alignItems="center"
+                container
+                justify="space-between"
+                wrap="nowrap"
+              >
                 {_getMenuButtonLogo()}
-                <Grid item xs={6}>
+                <Grid item md={6}>
                   <Grid
                     container
                     direction="row"
@@ -433,6 +439,7 @@ export default function App() {
                     wrap="nowrap"
                   >
                     <TextField
+                      className={classes.searchBar}
                       placeholder="Search"
                       margin="dense"
                       variant="outlined"
@@ -443,8 +450,15 @@ export default function App() {
                   </Grid>
                 </Grid>
                 <Grid item>
-                  <Grid alignItems="center" container>
+                  <Grid alignItems="center" container wrap="nowrap">
                     <Grid item>
+                      <IconButton
+                        aria-label="search"
+                        color="inherit"
+                        edge="start"
+                      >
+                        <SearchIcon />
+                      </IconButton>
                       <IconButton
                         aria-label="videos"
                         color="inherit"
@@ -495,7 +509,12 @@ export default function App() {
             open={!open && screenNarrow}
           >
             <Toolbar>
-              <Grid alignItems="center" container justify="space-between">
+              <Grid
+                alignItems="center"
+                container
+                justify="space-between"
+                wrap="nowrap"
+              >
                 {_getMenuButtonLogo()}
               </Grid>
             </Toolbar>
