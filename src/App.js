@@ -260,6 +260,7 @@ export default function App() {
 
   const classes = useStyles();
   const screenNarrow = useMediaQuery(theme.breakpoints.down('md'));
+  const screenSmall = useMediaQuery('(max-width:664px)');
 
   /**
    * Get Drawer Content
@@ -424,7 +425,7 @@ export default function App() {
                 wrap="nowrap"
               >
                 {_getMenuButtonLogo()}
-                <Grid item md={6}>
+                <Grid hidden={screenSmall} item md={6}>
                   <Grid
                     container
                     direction="row"
@@ -444,7 +445,7 @@ export default function App() {
                 </Grid>
                 <Grid item>
                   <Grid alignItems="center" container wrap="nowrap">
-                    <Grid item>
+                    <Grid hidden={!screenSmall} item>
                       <IconButton
                         aria-label="search"
                         color="inherit"
@@ -452,6 +453,8 @@ export default function App() {
                       >
                         <SearchIcon />
                       </IconButton>
+                    </Grid>
+                    <Grid item>
                       <IconButton
                         aria-label="videos"
                         color="inherit"
