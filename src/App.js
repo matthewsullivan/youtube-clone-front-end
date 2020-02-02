@@ -431,7 +431,7 @@ export default function App() {
           <AppBar elevation={0}>
             <Toolbar
               className={classes.searchToolBar}
-              style={{display: searchOpen ? 'flex' : 'none'}}
+              style={{display: searchOpen && screenSmall ? 'flex' : 'none'}}
             >
               <Grid
                 alignItems="center"
@@ -468,7 +468,9 @@ export default function App() {
                 </Grid>
               </Grid>
             </Toolbar>
-            <Toolbar style={{display: searchOpen ? 'none' : 'flex'}}>
+            <Toolbar
+              style={{display: searchOpen && screenSmall ? 'none' : 'flex'}}
+            >
               <Grid
                 alignItems="center"
                 container
