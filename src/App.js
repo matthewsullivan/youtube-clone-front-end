@@ -20,6 +20,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import AppsIcon from '@material-ui/icons/Apps';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import MenuIcon from '@material-ui/icons/Menu';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SearchIcon from '@material-ui/icons/Search';
@@ -164,10 +165,10 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 12,
     top: toolBarHeight,
     whiteSpace: 'nowrap',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.up('xs')]: {
       width: 0,
     },
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: theme.spacing(9),
     },
     [theme.breakpoints.up('lg')]: {
@@ -223,6 +224,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 0,
     maxWidth: 576,
     width: '50%',
+    [theme.breakpoints.up('xs')]: {
+      width: '100%',
+    },
     [theme.breakpoints.up('md')]: {
       width: '100%',
     },
@@ -255,7 +259,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function App() {
-  const [open, setOpen] = React.useState(true);
+  const [drawerOpen, setDrawerOpen] = React.useState(true);
+  const [searchOpen, setSearchOpen] = React.useState(false);
   const [selectedIndex, setIndex] = React.useState(0);
 
   const classes = useStyles();
@@ -377,11 +382,11 @@ export default function App() {
     return (
       <Grid item>
         <IconButton
-          aria-label="open drawer"
+          aria-label="drawerOpen drawer"
           className={classes.menuButton}
           color="inherit"
           edge="start"
-          onClick={_handleToggle}
+          onClick={_handleDrawerToggle}
         >
           <MenuIcon />
         </IconButton>
@@ -397,18 +402,25 @@ export default function App() {
   };
 
   /**
+   * Handle Drawer Toggle
+   */
+  const _handleDrawerToggle = () => {
+    setDrawerOpen(!drawerOpen);
+  };
+
+  /**
+   * Handle Search Toggle
+   */
+  const _handleSearchToggle = () => {
+    setSearchOpen(!searchOpen);
+  };
+
+  /**
    * Handle List Item Click
    * @param {number} index
    */
   const _handleListItemClick = (index) => {
     setIndex(index);
-  };
-
-  /**
-   * Handle Toggle
-   */
-  const _handleToggle = () => {
-    setOpen(!open);
   };
 
   return (
@@ -417,7 +429,48 @@ export default function App() {
         <div className={classes.root}>
           <CssBaseline />
           <AppBar elevation={0}>
-            <Toolbar>
+            <Toolbar
+              className={classes.searchToolBar}
+              style={{display: searchOpen && screenSmall ? 'flex' : 'none'}}
+            >
+              <Grid
+                alignItems="center"
+                container
+                justify="space-between"
+                wrap="nowrap"
+              >
+                <Grid item xs={1}>
+                  <IconButton
+                    aria-label="close mobile search"
+                    color="inherit"
+                    edge="start"
+                    onClick={_handleSearchToggle}
+                  >
+                    <KeyboardBackspaceIcon />
+                  </IconButton>
+                </Grid>
+                <Grid item xs={11}>
+                  <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    wrap="nowrap"
+                  >
+                    <TextField
+                      className={classes.searchBar}
+                      placeholder="Search"
+                      variant="outlined"
+                    />
+                    <Button disableElevation variant="contained">
+                      <SearchIcon fontSize="small" />
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Toolbar>
+            <Toolbar
+              style={{display: searchOpen && screenSmall ? 'none' : 'flex'}}
+            >
               <Grid
                 alignItems="center"
                 container
@@ -435,7 +488,6 @@ export default function App() {
                     <TextField
                       className={classes.searchBar}
                       placeholder="Search"
-                      margin="dense"
                       variant="outlined"
                     />
                     <Button disableElevation variant="contained">
@@ -450,6 +502,7 @@ export default function App() {
                         aria-label="search"
                         color="inherit"
                         edge="start"
+                        onClick={_handleSearchToggle}
                       >
                         <SearchIcon />
                       </IconButton>
@@ -502,7 +555,7 @@ export default function App() {
             classes={{
               paper: clsx(classes.drawerMobile),
             }}
-            open={!open && screenNarrow}
+            open={!drawerOpen && screenNarrow}
           >
             <Toolbar>
               <Grid
@@ -526,22 +579,22 @@ export default function App() {
 
           <Drawer
             classes={{
-              paper: clsx(classes.drawer, !open && classes.drawerNarrow),
+              paper: clsx(classes.drawer, !drawerOpen && classes.drawerNarrow),
             }}
-            open={open}
+            open={drawerOpen}
             variant="permanent"
           >
             <List
               aria-label="main application navigation"
               component="nav"
-              hidden={open && !screenNarrow ? false : true}
+              hidden={drawerOpen && !screenNarrow ? false : true}
             >
               {_getDrawerContent()}
             </List>
             <List
               aria-label="main application narrow navigation view"
               component="nav"
-              hidden={!open || screenNarrow ? false : true}
+              hidden={!drawerOpen || screenNarrow ? false : true}
             >
               {Navigation.map((item, index) => (
                 <React.Fragment key={index}>
