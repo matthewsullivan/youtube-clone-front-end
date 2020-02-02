@@ -224,6 +224,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 0,
     maxWidth: 576,
     width: '50%',
+    [theme.breakpoints.up('xs')]: {
+      width: '100%',
+    },
     [theme.breakpoints.up('md')]: {
       width: '100%',
     },
@@ -426,14 +429,17 @@ export default function App() {
         <div className={classes.root}>
           <CssBaseline />
           <AppBar elevation={0}>
-            <Toolbar style={{display: searchOpen ? 'flex' : 'none'}}>
+            <Toolbar
+              className={classes.searchToolBar}
+              style={{display: searchOpen ? 'flex' : 'none'}}
+            >
               <Grid
                 alignItems="center"
                 container
                 justify="space-between"
                 wrap="nowrap"
               >
-                <Grid item>
+                <Grid item xs={1}>
                   <IconButton
                     aria-label="close mobile search"
                     color="inherit"
@@ -443,7 +449,7 @@ export default function App() {
                     <KeyboardBackspaceIcon />
                   </IconButton>
                 </Grid>
-                <Grid item>
+                <Grid item xs={11}>
                   <Grid
                     container
                     direction="row"
@@ -547,7 +553,7 @@ export default function App() {
             classes={{
               paper: clsx(classes.drawerMobile),
             }}
-            drawerOpen={!drawerOpen && screenNarrow}
+            open={!drawerOpen && screenNarrow}
           >
             <Toolbar>
               <Grid
@@ -573,7 +579,7 @@ export default function App() {
             classes={{
               paper: clsx(classes.drawer, !drawerOpen && classes.drawerNarrow),
             }}
-            drawerOpen={drawerOpen}
+            open={drawerOpen}
             variant="permanent"
           >
             <List
