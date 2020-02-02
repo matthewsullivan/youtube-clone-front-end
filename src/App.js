@@ -164,10 +164,10 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 12,
     top: toolBarHeight,
     whiteSpace: 'nowrap',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.up('xs')]: {
       width: 0,
     },
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: theme.spacing(9),
     },
     [theme.breakpoints.up('lg')]: {
