@@ -36,7 +36,7 @@ import clsx from 'clsx';
 
 import Home from './components/Home';
 import Template from './components/Template';
-import {Footer, Navigation} from './objects/navigation';
+import {Footer, Navigation} from './model/navigation';
 
 const primaryColor = '#272727';
 const secondaryColor = '#1e1e1e';
@@ -271,7 +271,7 @@ export default function App() {
    * Get Drawer Content
    * @return {JSX}
    */
-  const _getDrawerContent = () => {
+  const getDrawerContent = () => {
     return (
       <>
         {Navigation.map((item, index) => (
@@ -279,7 +279,7 @@ export default function App() {
             <ListItem
               button
               component={Link}
-              onClick={() => _handleListItemClick(index)}
+              onClick={() => handleListItemClick(index)}
               selected={selectedIndex === index}
               to={item.path}
             >
@@ -378,7 +378,7 @@ export default function App() {
    * Get Menu Button Logo
    * @return {JSX}
    */
-  const _getMenuButtonLogo = () => {
+  const getMenuButtonLogo = () => {
     return (
       <Grid item>
         <IconButton
@@ -386,11 +386,11 @@ export default function App() {
           className={classes.menuButton}
           color="inherit"
           edge="start"
-          onClick={_handleDrawerToggle}
+          onClick={handleDrawerToggle}
         >
           <MenuIcon />
         </IconButton>
-        <Link href="/" onClick={() => _handleListItemClick(0)} to="/">
+        <Link href="/" onClick={() => handleListItemClick(0)} to="/">
           <img
             alt="Application Logo"
             className={classes.logo}
@@ -404,14 +404,14 @@ export default function App() {
   /**
    * Handle Drawer Toggle
    */
-  const _handleDrawerToggle = () => {
+  const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
   };
 
   /**
    * Handle Search Toggle
    */
-  const _handleSearchToggle = () => {
+  const handleSearchToggle = () => {
     setSearchOpen(!searchOpen);
   };
 
@@ -419,7 +419,7 @@ export default function App() {
    * Handle List Item Click
    * @param {number} index
    */
-  const _handleListItemClick = (index) => {
+  const handleListItemClick = (index) => {
     setIndex(index);
   };
 
@@ -444,7 +444,7 @@ export default function App() {
                     aria-label="close mobile search"
                     color="inherit"
                     edge="start"
-                    onClick={_handleSearchToggle}
+                    onClick={handleSearchToggle}
                   >
                     <KeyboardBackspaceIcon />
                   </IconButton>
@@ -477,7 +477,7 @@ export default function App() {
                 justify="space-between"
                 wrap="nowrap"
               >
-                {_getMenuButtonLogo()}
+                {getMenuButtonLogo()}
                 <Grid hidden={screenSmall} item md={6}>
                   <Grid
                     container
@@ -502,7 +502,7 @@ export default function App() {
                         aria-label="search"
                         color="inherit"
                         edge="start"
-                        onClick={_handleSearchToggle}
+                        onClick={handleSearchToggle}
                       >
                         <SearchIcon />
                       </IconButton>
@@ -564,7 +564,7 @@ export default function App() {
                 justify="space-between"
                 wrap="nowrap"
               >
-                {_getMenuButtonLogo()}
+                {getMenuButtonLogo()}
               </Grid>
             </Toolbar>
 
@@ -574,7 +574,7 @@ export default function App() {
               }}
             />
 
-            {_getDrawerContent()}
+            {getDrawerContent()}
           </Drawer>
 
           <Drawer
@@ -589,7 +589,7 @@ export default function App() {
               component="nav"
               hidden={drawerOpen && !screenNarrow ? false : true}
             >
-              {_getDrawerContent()}
+              {getDrawerContent()}
             </List>
             <List
               aria-label="main application narrow navigation view"
@@ -603,7 +603,7 @@ export default function App() {
                     className={classes.sideBarSmall}
                     component={Link}
                     style={{display: index < 5 ? 'block' : 'none'}}
-                    onClick={() => _handleListItemClick(index)}
+                    onClick={() => handleListItemClick(index)}
                     to={item.path}
                   >
                     <Grid
