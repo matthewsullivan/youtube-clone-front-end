@@ -20,7 +20,7 @@ import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 
-const Footer = [
+const footerData = [
   {
     page: 'About',
     path: '',
@@ -78,7 +78,7 @@ const Footer = [
   },
 ];
 
-const Navigation = [
+const sidebarData = [
   {
     page: 'Home',
     path: '',
@@ -186,4 +186,4 @@ const Navigation = [
   },
 ];
 
-export {Footer, Navigation};
+export {footerData, sidebarData};
