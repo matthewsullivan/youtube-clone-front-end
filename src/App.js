@@ -26,117 +26,15 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SearchIcon from '@material-ui/icons/Search';
 import VideoCallIcon from '@material-ui/icons/VideoCall';
 
-import {
-  MuiThemeProvider,
-  createMuiTheme,
-  makeStyles,
-} from '@material-ui/core/styles';
+import {MuiThemeProvider, makeStyles} from '@material-ui/core/styles';
 
 import clsx from 'clsx';
 
 import Home from './components/Home';
 import Template from './components/Template';
-import {Footer, Navigation} from './model/navigation';
 
-const primaryColor = '#272727';
-const secondaryColor = '#1e1e1e';
-const toolBarHeight = 56;
-
-const theme = createMuiTheme({
-  overrides: {
-    MuiButton: {
-      root: {
-        borderRadius: 0,
-        height: 32,
-      },
-
-      contained: {
-        backgroundColor: '#383838',
-        color: '#747474',
-        '&:hover': {
-          backgroundColor: '#3e3e3e',
-          color: '#9c9c9c',
-        },
-      },
-    },
-
-    MuiDivider: {
-      root: {
-        backgroundColor: '#3e3e3e',
-        margin: '12px 0 8px',
-      },
-    },
-
-    MuiList: {
-      padding: {
-        paddingBottom: 0,
-        paddingTop: 0,
-      },
-    },
-
-    MuiListItem: {
-      root: {
-        color: '#fff',
-        height: 40,
-        '&$selected': {
-          backgroundColor: '#3e3e3e',
-        },
-        '&$selected:hover': {
-          backgroundColor: '#525252',
-        },
-      },
-      button: {
-        '&:hover': {
-          backgroundColor: '#3e3e3e',
-        },
-      },
-    },
-
-    MuiListItemIcon: {
-      root: {
-        color: '#909090',
-        marginLeft: 8,
-        minWidth: 48,
-      },
-    },
-
-    MuiListItemText: {
-      primary: {
-        fontSize: '0.85rem',
-        letterSpacing: '0.015em;',
-      },
-    },
-
-    MuiOutlinedInput: {
-      root: {
-        background: '#121212',
-        borderRadius: 0,
-        height: 32,
-      },
-      input: {
-        color: '#fff',
-        '&::placeholder': {
-          color: '#fff',
-          fontSize: '1rem',
-          fontWeight: 400,
-        },
-      },
-      notchedOutline: {
-        borderColor: '#383838',
-      },
-    },
-
-    MuiToolbar: {
-      regular: {
-        background: primaryColor,
-        minHeight: toolBarHeight,
-        '@media (min-width: 600px)': {
-          minHeight: toolBarHeight,
-        },
-      },
-    },
-  },
-});
+import {theme} from './common/theme';
+import {footerData, sidebarData} from './model/navigation';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -145,11 +43,10 @@ const useStyles = makeStyles((theme) => ({
   },
 
   content: {
-    background: secondaryColor,
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
-    paddingTop: toolBarHeight,
+    paddingTop: 56,
   },
 
   copyright: {
@@ -158,12 +55,11 @@ const useStyles = makeStyles((theme) => ({
   },
 
   drawer: {
-    background: primaryColor,
     color: '#fff',
-    height: `calc(100vh - ${toolBarHeight}px)`,
+    height: `calc(100vh - 56px)`,
     position: 'relative',
     paddingTop: 12,
-    top: toolBarHeight,
+    top: 56,
     whiteSpace: 'nowrap',
     [theme.breakpoints.up('xs')]: {
       width: 0,
@@ -181,7 +77,6 @@ const useStyles = makeStyles((theme) => ({
   },
 
   drawerMobile: {
-    background: primaryColor,
     color: '#fff',
     height: '100vh',
     position: 'relative',
@@ -247,6 +142,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   signInButton: {
+    border: '1px solid #3ea6ff',
     borderRadius: 2,
     color: '#3ea6ff',
     height: 40,
@@ -274,7 +170,7 @@ export default function App() {
   const getDrawerContent = () => {
     return (
       <>
-        {Navigation.map((item, index) => (
+        {sidebarData.map((item, index) => (
           <React.Fragment key={index}>
             <ListItem
               button
@@ -351,7 +247,7 @@ export default function App() {
           direction="row"
           justify="flex-start"
         >
-          {Footer.map((item, index) => (
+          {footerData.map((item, index) => (
             <React.Fragment key={index}>
               <Grid item>
                 <Link
@@ -594,7 +490,7 @@ export default function App() {
               component="nav"
               hidden={!drawerOpen || screenNarrow ? false : true}
             >
-              {Navigation.map((item, index) => (
+              {sidebarData.map((item, index) => (
                 <React.Fragment key={index}>
                   <ListItem
                     button
