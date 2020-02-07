@@ -295,14 +295,12 @@ export default function App() {
 
             <Divider
               hidden={
-                index === 2 ||
-                index === 4 ||
-                index === 13 ||
-                index === 14 ||
-                index === 16 ||
-                index === 20
-                  ? false
-                  : true
+                index !== 2 &&
+                index !== 4 &&
+                index !== 13 &&
+                index !== 14 &&
+                index !== 16 &&
+                index !== 20
               }
             />
 
