@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import {useLocation} from 'react-router';
+import {Switch, Route, Link} from 'react-router-dom';
 
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
@@ -151,7 +152,14 @@ const useStyles = makeStyles((theme) => ({
 export default function App() {
   const [drawerOpen, setDrawerOpen] = React.useState(true);
   const [searchOpen, setSearchOpen] = React.useState(false);
-  const [selectedIndex, setIndex] = React.useState(0);
+
+  const location = useLocation();
+
+  const index = sidebarData.findIndex((page) =>
+    page.path.includes(location.pathname.substring(1))
+  );
+
+  const [selectedIndex, setIndex] = React.useState(index);
 
   const classes = useStyles();
   const screenNarrow = useMediaQuery(theme.breakpoints.down('md'));
@@ -305,223 +313,211 @@ export default function App() {
   };
 
   return (
-    <Router>
-      <MuiThemeProvider theme={theme}>
-        <div className={classes.root}>
-          <CssBaseline />
-          <AppBar elevation={0}>
-            <Toolbar
-              className={classes.searchToolBar}
-              style={{display: searchOpen && screenSmall ? 'flex' : 'none'}}
-            >
-              <Grid
-                alignItems="center"
-                container
-                justify="space-between"
-                wrap="nowrap"
-              >
-                <Grid item xs={1}>
-                  <IconButton
-                    aria-label="close mobile search"
-                    color="inherit"
-                    edge="start"
-                    onClick={handleSearchToggle}
-                  >
-                    <KeyboardBackspaceIcon />
-                  </IconButton>
-                </Grid>
-                <Grid item xs={11}>
-                  <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    wrap="nowrap"
-                  >
-                    <TextField
-                      className={classes.searchBar}
-                      placeholder="Search"
-                      variant="outlined"
-                    />
-                    <Button disableElevation variant="contained">
-                      <SearchIcon fontSize="small" />
-                    </Button>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Toolbar>
-            <Toolbar
-              style={{display: searchOpen && screenSmall ? 'none' : 'flex'}}
-            >
-              <Grid
-                alignItems="center"
-                container
-                justify="space-between"
-                wrap="nowrap"
-              >
-                {getMenuButtonLogo()}
-                <Grid hidden={screenSmall} item md={6}>
-                  <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    wrap="nowrap"
-                  >
-                    <TextField
-                      className={classes.searchBar}
-                      placeholder="Search"
-                      variant="outlined"
-                    />
-                    <Button disableElevation variant="contained">
-                      <SearchIcon fontSize="small" />
-                    </Button>
-                  </Grid>
-                </Grid>
-                <Grid item>
-                  <Grid alignItems="center" container wrap="nowrap">
-                    <Grid hidden={!screenSmall} item>
-                      <IconButton
-                        aria-label="search"
-                        color="inherit"
-                        edge="start"
-                        onClick={handleSearchToggle}
-                      >
-                        <SearchIcon />
-                      </IconButton>
-                    </Grid>
-                    <Grid item>
-                      <IconButton
-                        aria-label="videos"
-                        color="inherit"
-                        edge="start"
-                      >
-                        <VideoCallIcon />
-                      </IconButton>
-                    </Grid>
-                    <Grid item>
-                      <IconButton
-                        aria-label="videos"
-                        color="inherit"
-                        edge="start"
-                      >
-                        <AppsIcon />
-                      </IconButton>
-                    </Grid>
-                    <Grid item>
-                      <IconButton
-                        aria-label="videos"
-                        color="inherit"
-                        edge="start"
-                      >
-                        <MoreVertIcon />
-                      </IconButton>
-                    </Grid>
-                    <Grid item>
-                      <SignInButton />
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Toolbar>
-          </AppBar>
-
-          <Drawer
-            classes={{
-              paper: clsx(classes.drawerMobile),
-            }}
-            open={!drawerOpen && screenNarrow}
+    <MuiThemeProvider theme={theme}>
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar elevation={0}>
+          <Toolbar
+            className={classes.searchToolBar}
+            style={{display: searchOpen && screenSmall ? 'flex' : 'none'}}
           >
-            <Toolbar>
-              <Grid
-                alignItems="center"
-                container
-                justify="space-between"
-                wrap="nowrap"
-              >
-                {getMenuButtonLogo()}
+            <Grid
+              alignItems="center"
+              container
+              justify="space-between"
+              wrap="nowrap"
+            >
+              <Grid item xs={1}>
+                <IconButton
+                  aria-label="close mobile search"
+                  color="inherit"
+                  edge="start"
+                  onClick={handleSearchToggle}
+                >
+                  <KeyboardBackspaceIcon />
+                </IconButton>
               </Grid>
-            </Toolbar>
-
-            <Divider
-              style={{
-                marginTop: 0,
-              }}
-            />
-
-            {getDrawerContent()}
-          </Drawer>
-
-          <Drawer
-            classes={{
-              paper: clsx(classes.drawer, !drawerOpen && classes.drawerNarrow),
-            }}
-            open={drawerOpen}
-            variant="permanent"
+              <Grid item xs={11}>
+                <Grid container direction="row" justify="center" wrap="nowrap">
+                  <TextField
+                    className={classes.searchBar}
+                    placeholder="Search"
+                    variant="outlined"
+                  />
+                  <Button disableElevation variant="contained">
+                    <SearchIcon fontSize="small" />
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Toolbar>
+          <Toolbar
+            style={{display: searchOpen && screenSmall ? 'none' : 'flex'}}
           >
-            <List
-              aria-label="main application navigation"
-              component="nav"
-              hidden={drawerOpen && !screenNarrow ? false : true}
+            <Grid
+              alignItems="center"
+              container
+              justify="space-between"
+              wrap="nowrap"
             >
-              {getDrawerContent()}
-            </List>
-            <List
-              aria-label="main application narrow navigation view"
-              component="nav"
-              hidden={!drawerOpen || screenNarrow ? false : true}
-            >
-              {sidebarData.map((item, index) => (
-                <React.Fragment key={index}>
-                  <ListItem
-                    button
-                    className={classes.sideBarSmall}
-                    component={Link}
-                    style={{display: index < 5 ? 'block' : 'none'}}
-                    onClick={() => handleListItemClick(index)}
-                    to={item.path}
-                  >
-                    <Grid
-                      alignItems="center"
-                      container
-                      direction="column"
-                      justify="center"
+              {getMenuButtonLogo()}
+              <Grid hidden={screenSmall} item md={6}>
+                <Grid container direction="row" justify="center" wrap="nowrap">
+                  <TextField
+                    className={classes.searchBar}
+                    placeholder="Search"
+                    variant="outlined"
+                  />
+                  <Button disableElevation variant="contained">
+                    <SearchIcon fontSize="small" />
+                  </Button>
+                </Grid>
+              </Grid>
+              <Grid item>
+                <Grid alignItems="center" container wrap="nowrap">
+                  <Grid hidden={!screenSmall} item>
+                    <IconButton
+                      aria-label="search"
+                      color="inherit"
+                      edge="start"
+                      onClick={handleSearchToggle}
                     >
-                      <Grid item>
-                        <ListItemIcon
-                          style={{
-                            color: selectedIndex === index ? '#fff' : '#909090',
-                          }}
-                        >
-                          {item.icon}
-                        </ListItemIcon>
-                      </Grid>
+                      <SearchIcon />
+                    </IconButton>
+                  </Grid>
+                  <Grid item>
+                    <IconButton
+                      aria-label="videos"
+                      color="inherit"
+                      edge="start"
+                    >
+                      <VideoCallIcon />
+                    </IconButton>
+                  </Grid>
+                  <Grid item>
+                    <IconButton
+                      aria-label="videos"
+                      color="inherit"
+                      edge="start"
+                    >
+                      <AppsIcon />
+                    </IconButton>
+                  </Grid>
+                  <Grid item>
+                    <IconButton
+                      aria-label="videos"
+                      color="inherit"
+                      edge="start"
+                    >
+                      <MoreVertIcon />
+                    </IconButton>
+                  </Grid>
+                  <Grid item>
+                    <SignInButton />
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Toolbar>
+        </AppBar>
 
-                      <Grid item>
-                        <Typography
-                          className={classes.sideBarSmallText}
-                          style={{
-                            color: selectedIndex === index ? '#fff' : '#909090',
-                          }}
-                          variant="caption"
-                        >
-                          {item.page}
-                        </Typography>
-                      </Grid>
+        <Drawer
+          classes={{
+            paper: clsx(classes.drawerMobile),
+          }}
+          open={!drawerOpen && screenNarrow}
+        >
+          <Toolbar>
+            <Grid
+              alignItems="center"
+              container
+              justify="space-between"
+              wrap="nowrap"
+            >
+              {getMenuButtonLogo()}
+            </Grid>
+          </Toolbar>
+
+          <Divider
+            style={{
+              marginTop: 0,
+            }}
+          />
+
+          {getDrawerContent()}
+        </Drawer>
+
+        <Drawer
+          classes={{
+            paper: clsx(classes.drawer, !drawerOpen && classes.drawerNarrow),
+          }}
+          open={drawerOpen}
+          variant="permanent"
+        >
+          <List
+            aria-label="main application navigation"
+            component="nav"
+            hidden={drawerOpen && !screenNarrow ? false : true}
+          >
+            {getDrawerContent()}
+          </List>
+          <List
+            aria-label="main application narrow navigation view"
+            component="nav"
+            hidden={!drawerOpen || screenNarrow ? false : true}
+          >
+            {sidebarData.map((item, index) => (
+              <React.Fragment key={index}>
+                <ListItem
+                  button
+                  className={classes.sideBarSmall}
+                  component={Link}
+                  style={{display: index < 5 ? 'block' : 'none'}}
+                  onClick={() => handleListItemClick(index)}
+                  to={item.path}
+                >
+                  <Grid
+                    alignItems="center"
+                    container
+                    direction="column"
+                    justify="center"
+                  >
+                    <Grid item>
+                      <ListItemIcon
+                        style={{
+                          color: selectedIndex === index ? '#fff' : '#909090',
+                        }}
+                      >
+                        {item.icon}
+                      </ListItemIcon>
                     </Grid>
-                  </ListItem>
-                </React.Fragment>
-              ))}
-            </List>
-          </Drawer>
 
-          <main className={classes.content}>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/library" component={Library} />
-              <Route path="/subscriptions" component={Subscriptions} />
-            </Switch>
-          </main>
-        </div>
-      </MuiThemeProvider>
-    </Router>
+                    <Grid item>
+                      <Typography
+                        className={classes.sideBarSmallText}
+                        style={{
+                          color: selectedIndex === index ? '#fff' : '#909090',
+                        }}
+                        variant="caption"
+                      >
+                        {item.page}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </ListItem>
+              </React.Fragment>
+            ))}
+          </List>
+        </Drawer>
+
+        <main className={classes.content}>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/library" component={Library} />
+            <Route path="/subscriptions" component={Subscriptions} />
+          </Switch>
+        </main>
+      </div>
+    </MuiThemeProvider>
   );
 }
