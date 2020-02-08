@@ -91,7 +91,7 @@ const sidebarData = [
   },
   {
     page: 'Subscriptions',
-    path: '',
+    path: 'subscriptions',
     icon: <SubscriptionsIcon fontSize="small" />,
   },
   {
