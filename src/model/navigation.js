@@ -96,7 +96,7 @@ const sidebarData = [
   },
   {
     page: 'Library',
-    path: '',
+    path: 'library',
     icon: <VideoLibraryIcon />,
   },
   {

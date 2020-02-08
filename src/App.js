@@ -30,6 +30,7 @@ import {MuiThemeProvider, makeStyles} from '@material-ui/core/styles';
 import clsx from 'clsx';
 
 import Home from './components/pages/Home';
+import Library from './components/pages/Library';
 import Subscriptions from './components/pages/Subscriptions';
 
 import SignInButton from './components/elements/SignInButton';
@@ -515,6 +516,7 @@ export default function App() {
           <main className={classes.content}>
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route path="/library" component={Library} />
               <Route path="/subscriptions" component={Subscriptions} />
             </Switch>
           </main>
