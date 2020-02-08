@@ -31,7 +31,7 @@ import {MuiThemeProvider, makeStyles} from '@material-ui/core/styles';
 import clsx from 'clsx';
 
 import Home from './components/Home';
-import Template from './components/Template';
+import Subscriptions from './components/Subscriptions';
 
 import {theme} from './common/theme';
 import {footerData, sidebarData} from './model/navigation';
@@ -537,7 +537,7 @@ export default function App() {
           <main className={classes.content}>
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/template" component={Template} />
+              <Route path="/subscriptions" component={Subscriptions} />
             </Switch>
           </main>
         </div>
