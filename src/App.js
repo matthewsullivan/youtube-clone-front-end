@@ -19,7 +19,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import AppsIcon from '@material-ui/icons/Apps';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import MenuIcon from '@material-ui/icons/Menu';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -30,8 +29,10 @@ import {MuiThemeProvider, makeStyles} from '@material-ui/core/styles';
 
 import clsx from 'clsx';
 
-import Home from './components/Home';
-import Subscriptions from './components/Subscriptions';
+import Home from './components/pages/Home';
+import Subscriptions from './components/pages/Subscriptions';
+
+import SignInButton from './components/elements/SignInButton';
 
 import {theme} from './common/theme';
 import {footerData, sidebarData} from './model/navigation';
@@ -141,14 +142,6 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: 'pre-line',
   },
 
-  signInButton: {
-    border: '1px solid #3ea6ff',
-    borderRadius: 2,
-    color: '#3ea6ff',
-    height: 40,
-    padding: '2px 12px',
-  },
-
   signInMessage: {
     paddingBottom: 8,
   },
@@ -209,15 +202,8 @@ export default function App() {
                 >
                   Sign in to like videos, comment, and subscribe.
                 </Typography>
-                <Button
-                  className={classes.signInButton}
-                  color="primary"
-                  size="large"
-                  startIcon={<AccountCircleIcon />}
-                  variant="outlined"
-                >
-                  Sign In
-                </Button>
+
+                <SignInButton />
               </div>
               <Divider />
               <Typography
@@ -429,15 +415,7 @@ export default function App() {
                       </IconButton>
                     </Grid>
                     <Grid item>
-                      <Button
-                        className={classes.signInButton}
-                        color="primary"
-                        size="large"
-                        startIcon={<AccountCircleIcon />}
-                        variant="outlined"
-                      >
-                        Sign In
-                      </Button>
+                      <SignInButton />
                     </Grid>
                   </Grid>
                 </Grid>
