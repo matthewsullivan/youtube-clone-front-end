@@ -18,6 +18,13 @@ const useStyles = makeStyles({
     color: '#fff',
   },
 
+  action: {
+    '&:hover $focusHighlight': {
+      opacity: 0,
+    },
+  },
+  focusHighlight: {},
+
   content: {
     paddingLeft: 0,
     parringRight: 0,
@@ -33,9 +40,16 @@ export default function VideoThumbail() {
 
   return (
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea
+        classes={{
+          root: classes.action,
+          focusHighlight: classes.focusHighlight,
+        }}
+        disableRipple
+      >
         <CardMedia
           className={classes.media}
+          component="img"
           image="https://picsum.photos/200"
           title="Video Thumbnail"
         />
