@@ -22,10 +22,6 @@ const useStyles = makeStyles({
     cursor: 'pointer',
   },
 
-  avatar: {
-    marginTop: -18,
-  },
-
   channel: {
     color: '#aaa',
     fontSize: 14,
@@ -37,7 +33,8 @@ const useStyles = makeStyles({
     },
   },
 
-  content: {
+  header: {
+    alignItems: 'start',
     paddingLeft: 0,
     paddingRight: 0,
   },
@@ -48,6 +45,7 @@ const useStyles = makeStyles({
 
   options: {
     color: '#aaa',
+    paddingTop: 6,
     '&:hover': {
       color: '#fff',
     },
@@ -93,7 +91,7 @@ export default function VideoThumbail() {
             <MoreVertIcon />
           </IconButton>
         }
-        className={classes.content}
+        className={classes.header}
         title={
           <Typography className={classes.title} gutterBottom variant="h6">
             Video title goes here
