@@ -4,7 +4,6 @@ import {useLocation} from 'react-router';
 import {Switch, Route, Link} from 'react-router-dom';
 
 import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
@@ -14,7 +13,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -34,6 +32,7 @@ import Home from './components/pages/Home';
 import Library from './components/pages/Library';
 import Subscriptions from './components/pages/Subscriptions';
 
+import SearchBar from './components/elements/SearchBar';
 import SignInButton from './components/elements/SignInButton';
 
 import {theme} from './common/theme';
@@ -115,19 +114,6 @@ const useStyles = makeStyles((theme) => ({
 
   menuButton: {
     marginRight: 12,
-  },
-
-  searchBar: {
-    marginBottom: 0,
-    marginTop: 0,
-    maxWidth: 576,
-    width: '50%',
-    [theme.breakpoints.up('xs')]: {
-      width: '100%',
-    },
-    [theme.breakpoints.up('md')]: {
-      width: '100%',
-    },
   },
 
   sideBarSmall: {
@@ -338,16 +324,7 @@ export default function App() {
                 </IconButton>
               </Grid>
               <Grid item xs={11}>
-                <Grid container direction="row" justify="center" wrap="nowrap">
-                  <TextField
-                    className={classes.searchBar}
-                    placeholder="Search"
-                    variant="outlined"
-                  />
-                  <Button disableElevation variant="contained">
-                    <SearchIcon fontSize="small" />
-                  </Button>
-                </Grid>
+                <SearchBar />
               </Grid>
             </Grid>
           </Toolbar>
@@ -363,14 +340,7 @@ export default function App() {
               {getMenuButtonLogo()}
               <Grid hidden={screenSmall} item md={6}>
                 <Grid container direction="row" justify="center" wrap="nowrap">
-                  <TextField
-                    className={classes.searchBar}
-                    placeholder="Search"
-                    variant="outlined"
-                  />
-                  <Button disableElevation variant="contained">
-                    <SearchIcon fontSize="small" />
-                  </Button>
+                  <SearchBar />
                 </Grid>
               </Grid>
               <Grid item>
