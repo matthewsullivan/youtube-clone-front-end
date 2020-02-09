@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 
 import {makeStyles} from '@material-ui/core/styles';
 
+import VideoThumbnail from '../elements/VideoThumbnail';
+
 const useStyles = makeStyles((theme) => ({
   container: {
     paddingBottom: theme.spacing(4),
@@ -34,6 +36,19 @@ export default function Home() {
           >
             Recommended
           </Typography>
+        </Grid>
+
+        <Grid item md={3} sm={6} xs={12}>
+          <VideoThumbnail />
+        </Grid>
+        <Grid item md={3} sm={6} xs={12}>
+          <VideoThumbnail />
+        </Grid>
+        <Grid item md={3} sm={6} xs={12}>
+          <VideoThumbnail />
+        </Grid>
+        <Grid item md={3} sm={6} xs={12}>
+          <VideoThumbnail />
         </Grid>
       </Grid>
     </Container>
