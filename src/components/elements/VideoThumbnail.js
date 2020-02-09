@@ -92,11 +92,6 @@ export default function VideoThumbail() {
           </IconButton>
         }
         className={classes.header}
-        title={
-          <Typography className={classes.title} gutterBottom variant="h6">
-            Video title goes here
-          </Typography>
-        }
         subheader={
           <>
             <Link className={classes.channel} to={'/'}>
@@ -107,6 +102,11 @@ export default function VideoThumbail() {
               1.1m views • 2 weeks
             </Typography>
           </>
+        }
+        title={
+          <Typography className={classes.title} gutterBottom variant="h6">
+            Video title goes here
+          </Typography>
         }
       />
     </Card>
