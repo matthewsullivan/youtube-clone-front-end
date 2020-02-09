@@ -4,11 +4,12 @@ import {Link} from 'react-router-dom';
 
 import Avatar from '@material-ui/core/Avatar';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
-import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import {makeStyles} from '@material-ui/core/styles';
 
@@ -18,14 +19,12 @@ const useStyles = makeStyles({
     borderRadius: 0,
     boxShadow: 'none',
     color: '#fff',
+    cursor: 'pointer',
   },
 
-  action: {
-    '&:hover $focusHighlight': {
-      opacity: 0,
-    },
+  avatar: {
+    marginTop: -18,
   },
-  focusHighlight: {},
 
   channel: {
     color: '#aaa',
@@ -40,11 +39,18 @@ const useStyles = makeStyles({
 
   content: {
     paddingLeft: 0,
-    parringRight: 0,
+    paddingRight: 0,
   },
 
   media: {
     height: 160,
+  },
+
+  options: {
+    color: '#aaa',
+    '&:hover': {
+      color: '#fff',
+    },
   },
 
   statistics: {
@@ -66,37 +72,45 @@ export default function VideoThumbail() {
 
   return (
     <Card className={classes.root}>
-      <CardActionArea
-        classes={{
-          root: classes.action,
-          focusHighlight: classes.focusHighlight,
-        }}
-        disableRipple
-      >
-        <CardMedia
-          className={classes.media}
-          component="img"
-          image="https://picsum.photos/200"
-          title="Video Thumbnail"
-        />
-        <CardContent className={classes.content}>
-          <Grid container spacing={2} wrap="nowrap">
-            <Grid item>
-              <Avatar>W</Avatar>
-            </Grid>
-            <Grid item>
-              <Typography className={classes.title} gutterBottom variant="h6">
-                Video title goes here
-              </Typography>
-              <Link className={classes.channel}>Channel Name</Link>
+      <CardMedia
+        className={classes.media}
+        component="img"
+        image="https://picsum.photos/400"
+        title="Video Thumbnail"
+      />
+      <CardHeader
+        avatar={
+          <Avatar aria-label="channel icon" className={classes.avatar}>
+            R
+          </Avatar>
+        }
+        action={
+          <IconButton
+            aria-label="settings"
+            className={classes.options}
+            disableRipple
+          >
+            <MoreVertIcon />
+          </IconButton>
+        }
+        className={classes.content}
+        title={
+          <Typography className={classes.title} gutterBottom variant="h6">
+            Video title goes here
+          </Typography>
+        }
+        subheader={
+          <>
+            <Link className={classes.channel} to={'/'}>
+              Channel Name
+            </Link>
 
-              <Typography className={classes.statistics} variant="subtitle2">
-                1.1m views • 2 weeks
-              </Typography>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </CardActionArea>
+            <Typography className={classes.statistics} variant="subtitle2">
+              1.1m views • 2 weeks
+            </Typography>
+          </>
+        }
+      />
     </Card>
   );
 }
