@@ -10,8 +10,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import {makeStyles} from '@material-ui/core/styles';
 
-import clsx from 'clsx';
-
 import VideoThumbnail from '../elements/VideoThumbnail';
 
 const useStyles = makeStyles((theme) => ({
@@ -23,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
 
   collapse: {
     borderBottom: '4px solid #383838',
+    paddingLeft: theme.spacing(1.5),
+    paddingRight: theme.spacing(1.5),
+    marginBottom: 32,
   },
 
   expand: {
@@ -33,17 +34,6 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: '#383838',
       color: '#fff',
     },
-  },
-
-  expandIcon: {
-    transform: 'rotate(0deg)',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-
-  expandOpen: {
-    transform: 'rotate(180deg)',
   },
 
   title: {
@@ -135,25 +125,35 @@ export default function Home() {
 
         {getTrending()}
 
-        <Grid className={classes.collapse} item xs={12}>
+        <Collapse
+          className={classes.collapse}
+          in={expanded}
+          timeout="auto"
+          unmountOnExit
+        >
+          <Grid container spacing={3}>
+            {getTrending()}
+          </Grid>
+        </Collapse>
+
+        <Grid
+          className={classes.collapse}
+          hidden={expanded}
+          item
+          style={{padding: 0}}
+          xs={12}
+        >
           <Button
             aria-expanded={expanded}
             aria-label="show more"
             className={classes.expand}
             onClick={handleExpandClick}
           >
-            <ExpandMoreIcon
-              className={clsx(classes.expandIcon, {
-                [classes.expandOpen]: expanded,
-              })}
-            />
+            <ExpandMoreIcon />
           </Button>
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <Grid container spacing={3}>
-              {getTrending()}
-            </Grid>
-          </Collapse>
         </Grid>
+
+        {getRecommended()}
       </Grid>
     </Container>
   );
