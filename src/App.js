@@ -31,6 +31,7 @@ import clsx from 'clsx';
 import Home from './components/pages/Home';
 import Library from './components/pages/Library';
 import Subscriptions from './components/pages/Subscriptions';
+import Trending from './components/pages/Trending';
 
 import SearchBar from './components/elements/SearchBar';
 import SignInButton from './components/elements/SignInButton';
@@ -485,6 +486,7 @@ export default function App() {
             <Route exact path="/" component={Home} />
             <Route path="/library" component={Library} />
             <Route path="/subscriptions" component={Subscriptions} />
+            <Route path="/trending" component={Trending} />
           </Switch>
         </main>
       </div>
