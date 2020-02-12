@@ -66,8 +66,8 @@ export default function Trending() {
       <>
         {videos.map((name, index) => {
           return (
-            <Grid item key={index} md={3} sm={6} xs={12}>
-              <VideoThumbnail />
+            <Grid item key={index} xs={12}>
+              <VideoThumbnail horizontal />
             </Grid>
           );
         })}
@@ -120,7 +120,7 @@ export default function Trending() {
         </Grid>
       </Grid>
 
-      <Grid container spacing={3}>
+      <Grid container>
         {getTrending()}
       </Grid>
     </Container>
