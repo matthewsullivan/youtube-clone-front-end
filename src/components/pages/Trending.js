@@ -40,9 +40,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     lineHeight: 2.5,
     textDecoration: 'none',
-    '&:hover': {
-      color: '#fff',
-    },
   },
 
   topics: {
