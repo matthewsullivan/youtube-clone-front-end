@@ -120,9 +120,7 @@ export default function Trending() {
         </Grid>
       </Grid>
 
-      <Grid container>
-        {getTrending()}
-      </Grid>
+      <Grid container>{getTrending()}</Grid>
     </Container>
   );
 }

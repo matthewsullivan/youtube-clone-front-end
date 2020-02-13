@@ -15,7 +15,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {makeStyles} from '@material-ui/core/styles';
 import {CardContent} from '@material-ui/core';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     background: 'transparent',
     borderRadius: 0,
@@ -48,16 +48,25 @@ const useStyles = makeStyles({
     paddingRight: 0,
   },
 
-  horizontal: {
-    marginBottom: 24,
-  },
-
   hidden: {
     display: 'none',
   },
 
+  horizontal: {
+    marginBottom: 24,
+  },
+
   media: {
     height: 160,
+  },
+
+  mediaHorizontal: {
+    height: 160,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      margin: 'auto',
+      width: 248,
+    },
   },
 
   options: {
@@ -72,7 +81,6 @@ const useStyles = makeStyles({
     color: '#aaa',
     fontSize: 14,
     fontWeight: 500,
-    lineHeight: 1.2,
   },
 
   title: {
@@ -80,7 +88,7 @@ const useStyles = makeStyles({
     fontWeight: 600,
     lineHeight: 1,
   },
-});
+}));
 
 export default function VideoThumbail(props) {
   const classes = useStyles();
@@ -99,13 +107,13 @@ export default function VideoThumbail(props) {
         >
           <Grid item>
             <CardMedia
-              className={classes.media}
+              className={classes.mediaHorizontal}
               component="img"
               image="https://picsum.photos/400"
               title="Video Thumbnail"
             />
           </Grid>
-          <Grid item xs={12} sm container>
+          <Grid container item sm>
             <Grid container direction="column" item spacing={2} xs>
               <CardContent>
                 <Grid container>
@@ -118,16 +126,21 @@ export default function VideoThumbail(props) {
                       Video title goes here
                     </Typography>
                   </Grid>
-                  <Link className={classes.channel} to={'/'}>
-                    Channel Name
-                  </Link>
-
-                  <Typography
-                    className={classes.statistics}
-                    variant="subtitle2"
-                  >
-                    1.1m views • 2 weeks
-                  </Typography>
+                  <Grid container spacing={1}>
+                    <Grid item>
+                      <Link className={classes.channel} to={'/'}>
+                        Channel Name
+                      </Link>
+                    </Grid>
+                    <Grid item>
+                      <Typography
+                        className={classes.statistics}
+                        variant="subtitle2"
+                      >
+                        • 1.1m views • 2 weeks
+                      </Typography>
+                    </Grid>
+                  </Grid>
                 </Grid>
                 <Typography className={classes.description} variant="subtitle2">
                   Hello friends and welcome back to our channel! A few months
