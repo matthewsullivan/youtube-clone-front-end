@@ -88,6 +88,13 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     lineHeight: 1,
   },
+
+  titleHorizontal: {
+    fontSize: 16,
+    fontWeight: 500,
+    lineHeight: 1,
+    textTransform: 'uppercase',
+  },
 }));
 
 export default function VideoThumbail(props) {
@@ -119,8 +126,7 @@ export default function VideoThumbail(props) {
                 <Grid container>
                   <Grid item xs={12}>
                     <Typography
-                      className={classes.title}
-                      gutterBottom
+                      className={classes.titleHorizontal}
                       variant="h6"
                     >
                       Video title goes here
@@ -135,6 +141,7 @@ export default function VideoThumbail(props) {
                     <Grid item>
                       <Typography
                         className={classes.statistics}
+                        gutterBottom
                         variant="subtitle2"
                       >
                         • 1.1m views • 2 weeks
