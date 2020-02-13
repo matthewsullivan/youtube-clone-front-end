@@ -86,7 +86,7 @@ const sidebarData = [
   },
   {
     page: 'Trending',
-    path: '',
+    path: 'trending',
     icon: <WhatshotIcon fontSize="small" />,
   },
   {
