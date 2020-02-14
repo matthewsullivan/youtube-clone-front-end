@@ -1,12 +1,10 @@
-import React from 'react';
-
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import {makeStyles} from '@material-ui/core/styles';
+import React from 'react';
+import SearchIcon from '@material-ui/icons/Search';
 import TextField from '@material-ui/core/TextField';
 
-import SearchIcon from '@material-ui/icons/Search';
-
-import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   searchBar: {

@@ -1,14 +1,10 @@
-import React from 'react';
-
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-
-import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
-
 import {makeStyles} from '@material-ui/core/styles';
-
+import React from 'react';
 import SignInButton from '../elements/SignInButton';
+import Typography from '@material-ui/core/Typography';
+import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
 
 const useStyles = makeStyles((theme) => ({
   body: {

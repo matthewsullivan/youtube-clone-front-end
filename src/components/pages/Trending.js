@@ -1,19 +1,14 @@
-import React from 'react';
-
-import {Link} from 'react-router-dom';
-
 import Avatar from '@material-ui/core/Avatar';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-
+import {Link} from 'react-router-dom';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
-import ReceiptIcon from '@material-ui/icons/Receipt';
-import VideogameAssetIcon from '@material-ui/icons/VideogameAsset';
-import TheatersIcon from '@material-ui/icons/Theaters';
-
 import {makeStyles} from '@material-ui/core/styles';
-
+import ReceiptIcon from '@material-ui/icons/Receipt';
+import React from 'react';
+import TheatersIcon from '@material-ui/icons/Theaters';
+import VideogameAssetIcon from '@material-ui/icons/VideogameAsset';
 import VideoThumbnail from '../elements/VideoThumbnail';
 
 const useStyles = makeStyles((theme) => ({

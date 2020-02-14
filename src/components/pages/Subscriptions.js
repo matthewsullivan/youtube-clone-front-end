@@ -1,14 +1,11 @@
-import React from 'react';
-
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import {makeStyles} from '@material-ui/core/styles';
+import React from 'react';
+import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
+import SignInButton from '../elements/SignInButton';
 import Typography from '@material-ui/core/Typography';
 
-import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
-
-import {makeStyles} from '@material-ui/core/styles';
-
-import SignInButton from '../elements/SignInButton';
 
 const useStyles = makeStyles((theme) => ({
   body: {

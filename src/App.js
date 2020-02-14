@@ -15,29 +15,24 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-
 import AppsIcon from '@material-ui/icons/Apps';
+import clsx from 'clsx';
+import {footerData, sidebarData} from './model/navigation';
+import Home from './components/pages/Home';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
+import Library from './components/pages/Library';
+import {MuiThemeProvider, makeStyles} from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import SearchIcon from '@material-ui/icons/Search';
-import VideoCallIcon from '@material-ui/icons/VideoCall';
-
-import {MuiThemeProvider, makeStyles} from '@material-ui/core/styles';
-
-import clsx from 'clsx';
-
-import Home from './components/pages/Home';
-import Library from './components/pages/Library';
 import Subscriptions from './components/pages/Subscriptions';
-import Trending from './components/pages/Trending';
-
 import SearchBar from './components/elements/SearchBar';
 import SignInButton from './components/elements/SignInButton';
-
+import SearchIcon from '@material-ui/icons/Search';
+import Trending from './components/pages/Trending';
 import {theme} from './common/theme';
-import {footerData, sidebarData} from './model/navigation';
+import Trending from './components/pages/Trending';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import VideoCallIcon from '@material-ui/icons/VideoCall';
 
 const useStyles = makeStyles((theme) => ({
   root: {

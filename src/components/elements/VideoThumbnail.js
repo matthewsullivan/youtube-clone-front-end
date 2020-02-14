@@ -1,19 +1,16 @@
-import React from 'react';
-
-import {Link} from 'react-router-dom';
-
 import Avatar from '@material-ui/core/Avatar';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
+import {CardContent} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
+import IconButton from '@material-ui/core/IconButton'; 
+import {Link} from 'react-router-dom';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import {makeStyles} from '@material-ui/core/styles';
+import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-
-import {makeStyles} from '@material-ui/core/styles';
-import {CardContent} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {

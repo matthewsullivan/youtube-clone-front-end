@@ -1,5 +1,3 @@
-import React from 'react';
-
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CameraIcon from '@material-ui/icons/Camera';
 import FeedbackIcon from '@material-ui/icons/Feedback';
@@ -9,6 +7,7 @@ import HistoryIcon from '@material-ui/icons/History';
 import HomeIcon from '@material-ui/icons/Home';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
+import React from 'react';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import SettingsIcon from '@material-ui/icons/Settings';
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
