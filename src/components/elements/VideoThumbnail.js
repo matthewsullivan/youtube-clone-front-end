@@ -97,6 +97,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+VideoThumbail.propTypes = {
+  horizontal: PropTypes.boolean,
+};
+
 export default function VideoThumbail(props) {
   const classes = useStyles();
 
