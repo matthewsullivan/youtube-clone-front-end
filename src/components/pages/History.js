@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {Link} from 'react-router-dom';
+
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -32,6 +34,14 @@ const useStyles = makeStyles((theme) => ({
     width: 96,
   },
 
+  link: {
+    color: '#3ea6ff',
+    fontSize: 14,
+    fontWeight: 500,
+    lineHeight: 1.2,
+    textDecoration: 'none',
+  },
+
   title: {
     color: '#fff',
   },
@@ -60,7 +70,7 @@ export default function History() {
             noWrap
             variant="h5"
           >
-            Enjoy your favorite videos
+            Keep track of what you watch
           </Typography>
         </Grid>
         <Grid item>
@@ -70,7 +80,13 @@ export default function History() {
             component="p"
             noWrap
           >
-            Sign in to access videos that you’ve liked or saved
+            Watch history isn't viewable when signed out.{' '}
+            <Link
+              className={classes.link}
+              to={'https://support.google.com/youtube/answer/95725?hl=en'}
+            >
+              Learn more
+            </Link>
           </Typography>
         </Grid>
         <Grid item>
