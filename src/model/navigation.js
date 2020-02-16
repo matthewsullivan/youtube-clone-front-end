@@ -101,7 +101,7 @@ const sidebarData = [
   },
   {
     page: 'History',
-    path: '',
+    path: 'history',
     icon: <HistoryIcon fontSize="small" />,
   },
   {
