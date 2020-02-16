@@ -47,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
   history: {
     height: 264,
     marginTop: 144,
+    [theme.breakpoints.down('xs')]: {
+      marginTop: 0,
+    },
   },
 
   indicator: {
@@ -87,10 +90,10 @@ const useStyles = makeStyles((theme) => ({
     height: 'calc(100vh - 64px)',
     padding: '12px 30px',
     [theme.breakpoints.down('xs')]: {
-      background: '#1e1e1e',
       height: 'auto',
     },
     [theme.breakpoints.down('sm')]: {
+      background: '#1e1e1e',
       height: 'auto',
     },
   },
