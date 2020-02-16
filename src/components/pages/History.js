@@ -107,6 +107,15 @@ export default function History() {
 
   const classes = useStyles();
 
+  /**
+   * Handle Change
+   * @param {object} event
+   * @param {string} value
+   */
+  const handleChange = (event, value) => {
+    setValue(value);
+  };
+
   return (
     <Container className={classes.root} maxWidth="lg">
       <Grid container direction="row-reverse">
@@ -190,13 +199,4 @@ export default function History() {
       </Grid>
     </Container>
   );
-
-  /**
-   * Handle Change
-   * @param {object} event
-   * @param {string} value
-   */
-  const handleChange = (event, value) => {
-    setValue(value);
-  };
 }
