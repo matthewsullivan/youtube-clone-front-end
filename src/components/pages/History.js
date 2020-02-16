@@ -205,7 +205,7 @@ export default function History() {
                   component="p"
                   noWrap
                 >
-                  Watch history isn't viewable when signed out.
+                  Watch history isn&apos;t viewable when signed out.
                   <a
                     className={classes.link}
                     href={
@@ -230,7 +230,7 @@ export default function History() {
               component="p"
               noWrap
             >
-              Search history isn't viewable when signed out.
+              Search history isn&apos;t viewable when signed out.
             </Typography>
           </TabPanel>
           <TabPanel index={2} value={value}>
