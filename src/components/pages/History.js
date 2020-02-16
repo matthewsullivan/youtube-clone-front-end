@@ -1,12 +1,10 @@
 import React from 'react';
 
-import {Link} from 'react-router-dom';
-
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
+import HistoryIcon from '@material-ui/icons/History';
 
 import {makeStyles} from '@material-ui/core/styles';
 
@@ -60,7 +58,7 @@ export default function History() {
         justify="space-around"
       >
         <Grid item>
-          <VideoLibraryIcon className={classes.icon} />
+          <HistoryIcon className={classes.icon} />
         </Grid>
         <Grid item>
           <Typography
