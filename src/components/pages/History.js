@@ -2,6 +2,7 @@ import React from 'react';
 
 import {Link} from 'react-router-dom';
 
+import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -23,6 +24,15 @@ const useStyles = makeStyles((theme) => ({
   root: {
     paddingRight: 0,
     paddingLeft: 0,
+  },
+
+  actionButtons: {
+    color: '#aaa',
+    paddingTop: 12,
+  },
+
+  actionButton: {
+    color: '#aaa',
   },
 
   body: {
@@ -59,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 
   tab: {
     borderBottom: '1px solid #3e3e3e',
-    height: 56,
+    minHeight: 56,
     textAlign: 'right',
     textTransform: 'none',
     maxWidth: '100%',
@@ -75,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
     background: '#151515',
     color: '#fff',
     height: 'calc(100vh - 64px)',
-    padding: 30,
+    padding: '12px 30px',
     [theme.breakpoints.down('xs')]: {
       background: '#1e1e1e',
       height: 'auto',
@@ -83,6 +93,13 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       height: 'auto',
     },
+  },
+
+  tabsTitle: {
+    borderBottom: '1px solid #3e3e3e',
+    color: '#fff',
+    fontWeight: 600,
+    padding: 12,
   },
 
   title: {
@@ -146,20 +163,18 @@ export default function History() {
   return (
     <Container className={classes.root} maxWidth="lg">
       <Grid container direction="row-reverse">
-        <Grid item md={4} xs={12}>
+        <Grid className={classes.tabs} item md={4} xs={12}>
           <Typography
-            className={classes.title}
+            className={classes.tabsTitle}
             color="inherit"
             component="h1"
             noWrap
-            variant="h5"
           >
-            Keep track of what you watch
+            History type
           </Typography>
           <Tabs
             aria-label="History tabs"
             classes={{indicator: classes.indicator}}
-            className={classes.tabs}
             orientation="vertical"
             onChange={handleChange}
             value={value}
@@ -230,6 +245,13 @@ export default function History() {
               {...a11yProps(4)}
             />
           </Tabs>
+
+          <div className={classes.actionButtons}>
+            <Button className={classes.actionButton}>
+              Clear all watch history
+            </Button>
+            <Button className={classes.actionButton}>Pause wath history</Button>
+          </div>
         </Grid>
 
         <Grid item md={8} xs={12}>
