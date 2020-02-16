@@ -45,15 +45,27 @@ const useStyles = makeStyles((theme) => ({
   },
 
   tabs: {
-    background: '#000',
+    background: '#151515',
     color: '#fff',
     height: 'calc(100vh - 64px)',
+    padding: 30,
     [theme.breakpoints.down('xs')]: {
       background: '#1e1e1e',
       height: 'auto',
     },
     [theme.breakpoints.down('sm')]: {
       height: 'auto',
+    },
+  },
+
+  tab: {
+    borderBottom: '1px solid #3e3e3e',
+    height: 56,
+    textAlign: 'left',
+    textTransform: 'none',
+    maxWidth: '100%',
+    '& span': {
+      display: 'initial',
     },
   },
 
@@ -80,15 +92,15 @@ function a11yProps(index) {
  * @return {JSX}
  */
 function TabPanel(props) {
-  const {children, value, index, ...other} = props;
+  const {children, index, value, ...other} = props;
 
   return (
     <Typography
+      aria-labelledby={`vertical-tab-${index}`}
       component="div"
-      role="tabpanel"
       hidden={value !== index}
       id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
+      role="tabpanel"
       {...other}
     >
       {value === index && <Box p={3}>{children}</Box>}
@@ -127,16 +139,41 @@ export default function History() {
             onChange={handleChange}
             value={value}
           >
-            <Tab label="Watch history" {...a11yProps(0)} />
-            <Tab label="Search history" {...a11yProps(1)} />
-            <Tab label="Comments" {...a11yProps(2)} />
-            <Tab label="Community" {...a11yProps(3)} />
-            <Tab label="Live Chat" {...a11yProps(4)} />
+            <Tab
+              className={classes.tab}
+              disableRipple
+              label="Watch history"
+              {...a11yProps(0)}
+            />
+            <Tab
+              className={classes.tab}
+              disableRipple
+              label="Search history"
+              {...a11yProps(1)}
+            />
+            <Tab
+              className={classes.tab}
+              disableRipple
+              label="Comments"
+              {...a11yProps(2)}
+            />
+            <Tab
+              className={classes.tab}
+              disableRipple
+              label="Community"
+              {...a11yProps(3)}
+            />
+            <Tab
+              className={classes.tab}
+              disableRipple
+              label="Live Chat"
+              {...a11yProps(4)}
+            />
           </Tabs>
         </Grid>
 
         <Grid item md={8} xs={12}>
-          <TabPanel value={value} index={0}>
+          <TabPanel index={0} value={value}>
             <Grid
               alignItems="center"
               className={classes.history}
@@ -183,16 +220,16 @@ export default function History() {
               </Grid>
             </Grid>
           </TabPanel>
-          <TabPanel value={value} index={1}>
+          <TabPanel index={1} value={value}>
             Item Two
           </TabPanel>
-          <TabPanel value={value} index={2}>
+          <TabPanel index={2} value={value}>
             Item Three
           </TabPanel>
-          <TabPanel value={value} index={3}>
+          <TabPanel index={3} value={value}>
             Item Four
           </TabPanel>
-          <TabPanel value={value} index={4}>
+          <TabPanel index={4} value={value}>
             Item Five
           </TabPanel>
         </Grid>
