@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {Link} from 'react-router-dom';
+
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -23,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
   body: {
     color: '#fff',
+    textAlign: 'center',
   },
 
   history: {
@@ -202,7 +205,7 @@ export default function History() {
                   component="p"
                   noWrap
                 >
-                  Watch history isn't viewable when signed out.{' '}
+                  Watch history isn't viewable when signed out.
                   <a
                     className={classes.link}
                     href={
@@ -221,16 +224,53 @@ export default function History() {
             </Grid>
           </TabPanel>
           <TabPanel index={1} value={value}>
-            Item Two
+            <Typography
+              className={classes.body}
+              color="inherit"
+              component="p"
+              noWrap
+            >
+              Search history isn't viewable when signed out.
+            </Typography>
           </TabPanel>
           <TabPanel index={2} value={value}>
-            Item Three
+            <Typography
+              className={classes.body}
+              color="inherit"
+              component="p"
+              noWrap
+            >
+              <Link className={classes.link} to={'/'}>
+                Sign in
+              </Link>{' '}
+              to view your comments
+            </Typography>
           </TabPanel>
           <TabPanel index={3} value={value}>
-            Item Four
+            <Typography
+              className={classes.body}
+              color="inherit"
+              component="p"
+              noWrap
+            >
+              <Link className={classes.link} to={'/'}>
+                Sign in
+              </Link>{' '}
+              to view your Community history
+            </Typography>
           </TabPanel>
           <TabPanel index={4} value={value}>
-            Item Five
+            <Typography
+              className={classes.body}
+              color="inherit"
+              component="p"
+              noWrap
+            >
+              <Link className={classes.link} to={'/'}>
+                Sign in
+              </Link>{' '}
+              to view your live chat history
+            </Typography>
           </TabPanel>
         </Grid>
       </Grid>
