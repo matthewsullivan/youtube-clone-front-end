@@ -10,6 +10,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Typography from '@material-ui/core/Typography';
 
 import HistoryIcon from '@material-ui/icons/History';
+import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 
 import {makeStyles} from '@material-ui/core/styles';
 
@@ -28,9 +30,17 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
 
+  checkedIcon: {
+    color: '#3ea6ff',
+  },
+
   history: {
     height: 264,
     marginTop: 144,
+  },
+
+  indicator: {
+    display: 'none',
   },
 
   icon: {
@@ -47,6 +57,20 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
   },
 
+  tab: {
+    borderBottom: '1px solid #3e3e3e',
+    height: 56,
+    textAlign: 'right',
+    textTransform: 'none',
+    maxWidth: '100%',
+    '& span': {
+      alignItems: 'flex-start',
+      display: 'flex',
+      flexDirection: 'row-reverse',
+      justifyContent: 'space-between',
+    },
+  },
+
   tabs: {
     background: '#151515',
     color: '#fff',
@@ -58,17 +82,6 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down('sm')]: {
       height: 'auto',
-    },
-  },
-
-  tab: {
-    borderBottom: '1px solid #3e3e3e',
-    height: 56,
-    textAlign: 'left',
-    textTransform: 'none',
-    maxWidth: '100%',
-    '& span': {
-      display: 'initial',
     },
   },
 
@@ -101,7 +114,6 @@ function TabPanel(props) {
     <Typography
       aria-labelledby={`vertical-tab-${index}`}
       component="div"
-      hidden={value !== index}
       id={`vertical-tabpanel-${index}`}
       role="tabpanel"
       {...other}
@@ -137,6 +149,7 @@ export default function History() {
         <Grid item md={4} xs={12}>
           <Tabs
             aria-label="History tabs"
+            classes={{indicator: classes.indicator}}
             className={classes.tabs}
             orientation="vertical"
             onChange={handleChange}
@@ -145,30 +158,65 @@ export default function History() {
             <Tab
               className={classes.tab}
               disableRipple
+              icon={
+                value === 0 ? (
+                  <RadioButtonCheckedIcon className={classes.checkedIcon} />
+                ) : (
+                  <RadioButtonUncheckedIcon />
+                )
+              }
               label="Watch history"
               {...a11yProps(0)}
             />
             <Tab
               className={classes.tab}
               disableRipple
+              icon={
+                value === 1 ? (
+                  <RadioButtonCheckedIcon className={classes.checkedIcon} />
+                ) : (
+                  <RadioButtonUncheckedIcon />
+                )
+              }
               label="Search history"
               {...a11yProps(1)}
             />
             <Tab
               className={classes.tab}
               disableRipple
+              icon={
+                value === 2 ? (
+                  <RadioButtonCheckedIcon className={classes.checkedIcon} />
+                ) : (
+                  <RadioButtonUncheckedIcon />
+                )
+              }
               label="Comments"
               {...a11yProps(2)}
             />
             <Tab
               className={classes.tab}
               disableRipple
+              icon={
+                value === 3 ? (
+                  <RadioButtonCheckedIcon className={classes.checkedIcon} />
+                ) : (
+                  <RadioButtonUncheckedIcon />
+                )
+              }
               label="Community"
               {...a11yProps(3)}
             />
             <Tab
               className={classes.tab}
               disableRipple
+              icon={
+                value === 4 ? (
+                  <RadioButtonCheckedIcon className={classes.checkedIcon} />
+                ) : (
+                  <RadioButtonUncheckedIcon />
+                )
+              }
               label="Live Chat"
               {...a11yProps(4)}
             />
