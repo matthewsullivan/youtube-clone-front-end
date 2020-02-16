@@ -246,12 +246,19 @@ export default function History() {
             />
           </Tabs>
 
-          <div className={classes.actionButtons}>
-            <Button className={classes.actionButton}>
+          <Grid
+            alignItems="flex-start"
+            className={classes.actionButtons}
+            container
+            direction="column"
+          >
+            <Button className={classes.actionButton} xs={12}>
               Clear all watch history
             </Button>
-            <Button className={classes.actionButton}>Pause wath history</Button>
-          </div>
+            <Button className={classes.actionButton} xs={12}>
+              Pause wath history
+            </Button>
+          </Grid>
         </Grid>
 
         <Grid item md={8} xs={12}>
