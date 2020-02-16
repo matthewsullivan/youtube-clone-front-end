@@ -15,6 +15,8 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {makeStyles} from '@material-ui/core/styles';
 import {CardContent} from '@material-ui/core';
 
+import PropTypes from 'prop-types';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     background: 'transparent',
@@ -96,6 +98,10 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'uppercase',
   },
 }));
+
+VideoThumbail.propTypes = {
+  horizontal: PropTypes.any,
+};
 
 export default function VideoThumbail(props) {
   const classes = useStyles();

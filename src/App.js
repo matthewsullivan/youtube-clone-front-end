@@ -28,6 +28,7 @@ import {MuiThemeProvider, makeStyles} from '@material-ui/core/styles';
 
 import clsx from 'clsx';
 
+import History from './components/pages/History';
 import Home from './components/pages/Home';
 import Library from './components/pages/Library';
 import Subscriptions from './components/pages/Subscriptions';
@@ -484,6 +485,7 @@ export default function App() {
         <main className={classes.content}>
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route path="/history" component={History} />
             <Route path="/library" component={Library} />
             <Route path="/subscriptions" component={Subscriptions} />
             <Route path="/trending" component={Trending} />
