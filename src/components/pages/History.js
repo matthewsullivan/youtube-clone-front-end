@@ -147,6 +147,15 @@ export default function History() {
     <Container className={classes.root} maxWidth="lg">
       <Grid container direction="row-reverse">
         <Grid item md={4} xs={12}>
+          <Typography
+            className={classes.title}
+            color="inherit"
+            component="h1"
+            noWrap
+            variant="h5"
+          >
+            Keep track of what you watch
+          </Typography>
           <Tabs
             aria-label="History tabs"
             classes={{indicator: classes.indicator}}
