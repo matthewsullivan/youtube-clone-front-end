@@ -81,12 +81,14 @@ export default function History() {
             noWrap
           >
             Watch history isn't viewable when signed out.{' '}
-            <Link
+            <a
               className={classes.link}
-              to={'https://support.google.com/youtube/answer/95725?hl=en'}
+              href={'https://support.google.com/youtube/answer/95725?hl=en'}
+              rel="noopener noreferrer"
+              target="_blank"
             >
               Learn more
-            </Link>
+            </a>
           </Typography>
         </Grid>
         <Grid item>
