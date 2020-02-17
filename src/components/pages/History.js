@@ -53,6 +53,10 @@ const useStyles = makeStyles((theme) => ({
     color: '#fff',
   },
 
+  dialogContent: {
+    borderBottom: '1px solid #3e3e3e',
+  },
+
   history: {
     height: 264,
     marginTop: 144,
@@ -159,12 +163,9 @@ TabPanel.propTypes = {
 };
 
 export default function History() {
-  const [open, setOpen] = React.useState(false);
+  const [historyDialogOpen, setHistoryDialogOpen] = React.useState(false);
+  const [pauseDialogOpen, setPauseDialogOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);
-
-  const [primaryActionButton, setLabel] = React.useState(
-    'Clear Search History'
-  );
 
   const classes = useStyles();
 
@@ -181,7 +182,8 @@ export default function History() {
    * Handle Close
    */
   const handleClose = () => {
-    setOpen(false);
+    setHistoryDialogOpen(false);
+    setPauseDialogOpen(false);
   };
 
   /**
@@ -189,10 +191,13 @@ export default function History() {
    * @param {string} action
    */
   const handleOpen = (action) => {
-    const label = action === 'clear' ? 'Clear Search History' : 'Pause';
+    if (action === 'clear') {
+      setHistoryDialogOpen(true);
 
-    setLabel(label);
-    setOpen(true);
+      return;
+    }
+
+    setPauseDialogOpen(true);
   };
 
   return (
@@ -299,7 +304,7 @@ export default function History() {
               onClick={() => handleOpen('pause')}
               xs={12}
             >
-              Pause wath history
+              Pause watch history
             </Button>
           </Grid>
         </Grid>
@@ -403,15 +408,16 @@ export default function History() {
           </TabPanel>
         </Grid>
       </Grid>
+
       <Dialog
-        aria-labelledby="customized-dialog-title"
+        aria-labelledby="clear history dialog"
         classes={{
           paper: classes.dialog,
         }}
         onClose={handleClose}
-        open={open}
+        open={historyDialogOpen}
       >
-        <MuiDialogContent dividers>
+        <MuiDialogContent className={classes.dialogContent} dividers>
           <Typography
             className={classes.title}
             color="inherit"
@@ -439,7 +445,57 @@ export default function History() {
             Cancel
           </Button>
           <Button autoFocus className={classes.blue} onClick={handleClose}>
-            {primaryActionButton}
+            Clear Watch History
+          </Button>
+        </MuiDialogActions>
+      </Dialog>
+
+      <Dialog
+        aria-labelledby="pause history dialog"
+        classes={{
+          paper: classes.dialog,
+        }}
+        onClose={handleClose}
+        open={pauseDialogOpen}
+      >
+        <MuiDialogContent className={classes.dialogContent} dividers>
+          <Typography
+            className={classes.title}
+            color="inherit"
+            component="h1"
+            gutterBottom
+          >
+            Pause watch history?
+          </Typography>
+          <Typography
+            component="p"
+            gutterBottom
+            style={{marginTop: 16, opacity: 0.5}}
+            variant="body2"
+          >
+            Pausing YouTube watch history on this device means you may see fewer
+            recommendations for new videos on YouTube.
+          </Typography>
+          <Typography
+            component="p"
+            gutterBottom
+            style={{marginTop: 16, opacity: 0.5}}
+            variant="body2"
+          >
+            Remember, pausing this setting doesn’t delete any previous activity,
+            but you can delete your YouTube watch history data anytime.
+          </Typography>
+        </MuiDialogContent>
+        <MuiDialogActions>
+          <Button
+            autoFocus
+            className={classes.actionButton}
+            onClick={handleClose}
+          >
+            Cancel
+          </Button>
+          <Button autoFocus className={classes.blue} onClick={handleClose}>
+            Pause
           </Button>
         </MuiDialogActions>
       </Dialog>
