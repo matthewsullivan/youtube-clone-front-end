@@ -29,13 +29,17 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 0,
   },
 
+  actionButton: {
+    color: '#aaa',
+  },
+
   actionButtons: {
     color: '#aaa',
     paddingTop: 12,
   },
 
-  actionButton: {
-    color: '#aaa',
+  blue: {
+    color: '#3ea6ff',
   },
 
   body: {
@@ -43,8 +47,10 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
 
-  checkedIcon: {
-    color: '#3ea6ff',
+  dialog: {
+    background: '#212121',
+    borderRadius: 0,
+    color: '#fff',
   },
 
   history: {
@@ -156,6 +162,10 @@ export default function History() {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);
 
+  const [primaryActionButton, setLabel] = React.useState(
+    'Clear Search History'
+  );
+
   const classes = useStyles();
 
   /**
@@ -176,8 +186,12 @@ export default function History() {
 
   /**
    * Handle Open
+   * @param {string} action
    */
-  const handleOpen = () => {
+  const handleOpen = (action) => {
+    const label = action === 'clear' ? 'Clear Search History' : 'Pause';
+
+    setLabel(label);
     setOpen(true);
   };
 
@@ -205,7 +219,7 @@ export default function History() {
               disableRipple
               icon={
                 value === 0 ? (
-                  <RadioButtonCheckedIcon className={classes.checkedIcon} />
+                  <RadioButtonCheckedIcon className={classes.blue} />
                 ) : (
                   <RadioButtonUncheckedIcon />
                 )
@@ -218,7 +232,7 @@ export default function History() {
               disableRipple
               icon={
                 value === 1 ? (
-                  <RadioButtonCheckedIcon className={classes.checkedIcon} />
+                  <RadioButtonCheckedIcon className={classes.blue} />
                 ) : (
                   <RadioButtonUncheckedIcon />
                 )
@@ -231,7 +245,7 @@ export default function History() {
               disableRipple
               icon={
                 value === 2 ? (
-                  <RadioButtonCheckedIcon className={classes.checkedIcon} />
+                  <RadioButtonCheckedIcon className={classes.blue} />
                 ) : (
                   <RadioButtonUncheckedIcon />
                 )
@@ -244,7 +258,7 @@ export default function History() {
               disableRipple
               icon={
                 value === 3 ? (
-                  <RadioButtonCheckedIcon className={classes.checkedIcon} />
+                  <RadioButtonCheckedIcon className={classes.blue} />
                 ) : (
                   <RadioButtonUncheckedIcon />
                 )
@@ -257,7 +271,7 @@ export default function History() {
               disableRipple
               icon={
                 value === 4 ? (
-                  <RadioButtonCheckedIcon className={classes.checkedIcon} />
+                  <RadioButtonCheckedIcon className={classes.blue} />
                 ) : (
                   <RadioButtonUncheckedIcon />
                 )
@@ -275,12 +289,16 @@ export default function History() {
           >
             <Button
               className={classes.actionButton}
-              onClick={handleOpen}
+              onClick={() => handleOpen('clear')}
               xs={12}
             >
               Clear all watch history
             </Button>
-            <Button className={classes.actionButton} xs={12}>
+            <Button
+              className={classes.actionButton}
+              onClick={() => handleOpen('pause')}
+              xs={12}
+            >
               Pause wath history
             </Button>
           </Grid>
@@ -387,22 +405,41 @@ export default function History() {
       </Grid>
       <Dialog
         aria-labelledby="customized-dialog-title"
+        classes={{
+          paper: classes.dialog,
+        }}
         onClose={handleClose}
         open={open}
       >
         <MuiDialogContent dividers>
-          <Typography gutterBottom>
-            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
-            cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
-            dui. Donec ullamcorper nulla non metus auctor fringilla.
+          <Typography
+            className={classes.title}
+            color="inherit"
+            component="h1"
+            gutterBottom
+          >
+            Clear watch history?
+          </Typography>
+          <Typography
+            component="p"
+            gutterBottom
+            style={{marginTop: 16, opacity: 0.5}}
+            variant="body2"
+          >
+            Your signed-out YouTube watch history will be cleared from this
+            device, and your video recommendations will be reset.
           </Typography>
         </MuiDialogContent>
         <MuiDialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button
+            autoFocus
+            className={classes.actionButton}
+            onClick={handleClose}
+          >
             Cancel
           </Button>
-          <Button autoFocus color="primary" onClick={handleClose}>
-            Save changes
+          <Button autoFocus className={classes.blue} onClick={handleClose}>
+            {primaryActionButton}
           </Button>
         </MuiDialogActions>
       </Dialog>
