@@ -5,6 +5,9 @@ import {Link} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
+import Dialog from '@material-ui/core/Dialog';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+import MuiDialogContent from '@material-ui/core/DialogContent';
 import Grid from '@material-ui/core/Grid';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
@@ -26,13 +29,17 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 0,
   },
 
+  actionButton: {
+    color: '#aaa',
+  },
+
   actionButtons: {
     color: '#aaa',
     paddingTop: 12,
   },
 
-  actionButton: {
-    color: '#aaa',
+  blue: {
+    color: '#3ea6ff',
   },
 
   body: {
@@ -40,8 +47,14 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
 
-  checkedIcon: {
-    color: '#3ea6ff',
+  dialog: {
+    background: '#212121',
+    borderRadius: 0,
+    color: '#fff',
+  },
+
+  dialogContent: {
+    borderBottom: '1px solid #3e3e3e',
   },
 
   history: {
@@ -150,6 +163,8 @@ TabPanel.propTypes = {
 };
 
 export default function History() {
+  const [historyDialogOpen, setHistoryDialogOpen] = React.useState(false);
+  const [pauseDialogOpen, setPauseDialogOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);
 
   const classes = useStyles();
@@ -161,6 +176,28 @@ export default function History() {
    */
   const handleChange = (event, value) => {
     setValue(value);
+  };
+
+  /**
+   * Handle Close
+   */
+  const handleClose = () => {
+    setHistoryDialogOpen(false);
+    setPauseDialogOpen(false);
+  };
+
+  /**
+   * Handle Open
+   * @param {string} action
+   */
+  const handleOpen = (action) => {
+    if (action === 'clear') {
+      setHistoryDialogOpen(true);
+
+      return;
+    }
+
+    setPauseDialogOpen(true);
   };
 
   return (
@@ -187,7 +224,7 @@ export default function History() {
               disableRipple
               icon={
                 value === 0 ? (
-                  <RadioButtonCheckedIcon className={classes.checkedIcon} />
+                  <RadioButtonCheckedIcon className={classes.blue} />
                 ) : (
                   <RadioButtonUncheckedIcon />
                 )
@@ -200,7 +237,7 @@ export default function History() {
               disableRipple
               icon={
                 value === 1 ? (
-                  <RadioButtonCheckedIcon className={classes.checkedIcon} />
+                  <RadioButtonCheckedIcon className={classes.blue} />
                 ) : (
                   <RadioButtonUncheckedIcon />
                 )
@@ -213,7 +250,7 @@ export default function History() {
               disableRipple
               icon={
                 value === 2 ? (
-                  <RadioButtonCheckedIcon className={classes.checkedIcon} />
+                  <RadioButtonCheckedIcon className={classes.blue} />
                 ) : (
                   <RadioButtonUncheckedIcon />
                 )
@@ -226,7 +263,7 @@ export default function History() {
               disableRipple
               icon={
                 value === 3 ? (
-                  <RadioButtonCheckedIcon className={classes.checkedIcon} />
+                  <RadioButtonCheckedIcon className={classes.blue} />
                 ) : (
                   <RadioButtonUncheckedIcon />
                 )
@@ -239,7 +276,7 @@ export default function History() {
               disableRipple
               icon={
                 value === 4 ? (
-                  <RadioButtonCheckedIcon className={classes.checkedIcon} />
+                  <RadioButtonCheckedIcon className={classes.blue} />
                 ) : (
                   <RadioButtonUncheckedIcon />
                 )
@@ -255,11 +292,19 @@ export default function History() {
             container
             direction="column"
           >
-            <Button className={classes.actionButton} xs={12}>
+            <Button
+              className={classes.actionButton}
+              onClick={() => handleOpen('clear')}
+              xs={12}
+            >
               Clear all watch history
             </Button>
-            <Button className={classes.actionButton} xs={12}>
-              Pause wath history
+            <Button
+              className={classes.actionButton}
+              onClick={() => handleOpen('pause')}
+              xs={12}
+            >
+              Pause watch history
             </Button>
           </Grid>
         </Grid>
@@ -363,6 +408,97 @@ export default function History() {
           </TabPanel>
         </Grid>
       </Grid>
+
+      <Dialog
+        aria-labelledby="clear history dialog"
+        classes={{
+          paper: classes.dialog,
+        }}
+        onClose={handleClose}
+        open={historyDialogOpen}
+      >
+        <MuiDialogContent className={classes.dialogContent} dividers>
+          <Typography
+            className={classes.title}
+            color="inherit"
+            component="h1"
+            gutterBottom
+          >
+            Clear watch history?
+          </Typography>
+          <Typography
+            component="p"
+            gutterBottom
+            style={{marginTop: 16, opacity: 0.5}}
+            variant="body2"
+          >
+            Your signed-out YouTube watch history will be cleared from this
+            device, and your video recommendations will be reset.
+          </Typography>
+        </MuiDialogContent>
+        <MuiDialogActions>
+          <Button
+            autoFocus
+            className={classes.actionButton}
+            onClick={handleClose}
+          >
+            Cancel
+          </Button>
+          <Button autoFocus className={classes.blue} onClick={handleClose}>
+            Clear Watch History
+          </Button>
+        </MuiDialogActions>
+      </Dialog>
+
+      <Dialog
+        aria-labelledby="pause history dialog"
+        classes={{
+          paper: classes.dialog,
+        }}
+        onClose={handleClose}
+        open={pauseDialogOpen}
+      >
+        <MuiDialogContent className={classes.dialogContent} dividers>
+          <Typography
+            className={classes.title}
+            color="inherit"
+            component="h1"
+            gutterBottom
+          >
+            Pause watch history?
+          </Typography>
+          <Typography
+            component="p"
+            gutterBottom
+            style={{marginTop: 16, opacity: 0.5}}
+            variant="body2"
+          >
+            Pausing YouTube watch history on this device means you may see fewer
+            recommendations for new videos on YouTube.
+          </Typography>
+          <Typography
+            component="p"
+            gutterBottom
+            style={{marginTop: 16, opacity: 0.5}}
+            variant="body2"
+          >
+            Remember, pausing this setting doesn’t delete any previous activity,
+            but you can delete your YouTube watch history data anytime.
+          </Typography>
+        </MuiDialogContent>
+        <MuiDialogActions>
+          <Button
+            autoFocus
+            className={classes.actionButton}
+            onClick={handleClose}
+          >
+            Cancel
+          </Button>
+          <Button autoFocus className={classes.blue} onClick={handleClose}>
+            Pause
+          </Button>
+        </MuiDialogActions>
+      </Dialog>
     </Container>
   );
 }
