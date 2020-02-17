@@ -5,6 +5,9 @@ import {Link} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
+import Dialog from '@material-ui/core/Dialog';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+import MuiDialogContent from '@material-ui/core/DialogContent';
 import Grid from '@material-ui/core/Grid';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
@@ -150,6 +153,7 @@ TabPanel.propTypes = {
 };
 
 export default function History() {
+  const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);
 
   const classes = useStyles();
@@ -161,6 +165,20 @@ export default function History() {
    */
   const handleChange = (event, value) => {
     setValue(value);
+  };
+
+  /**
+   * Handle Close
+   */
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  /**
+   * Handle Open
+   */
+  const handleOpen = () => {
+    setOpen(true);
   };
 
   return (
@@ -255,7 +273,11 @@ export default function History() {
             container
             direction="column"
           >
-            <Button className={classes.actionButton} xs={12}>
+            <Button
+              className={classes.actionButton}
+              onClick={handleOpen}
+              xs={12}
+            >
               Clear all watch history
             </Button>
             <Button className={classes.actionButton} xs={12}>
@@ -363,6 +385,27 @@ export default function History() {
           </TabPanel>
         </Grid>
       </Grid>
+      <Dialog
+        aria-labelledby="customized-dialog-title"
+        onClose={handleClose}
+        open={open}
+      >
+        <MuiDialogContent dividers>
+          <Typography gutterBottom>
+            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
+            cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
+            dui. Donec ullamcorper nulla non metus auctor fringilla.
+          </Typography>
+        </MuiDialogContent>
+        <MuiDialogActions>
+          <Button autoFocus onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button autoFocus color="primary" onClick={handleClose}>
+            Save changes
+          </Button>
+        </MuiDialogActions>
+      </Dialog>
     </Container>
   );
 }
