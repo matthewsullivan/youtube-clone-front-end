@@ -13,17 +13,17 @@ import {makeStyles} from '@material-ui/core/styles';
 import VideoThumbnail from '../elements/VideoThumbnail';
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    paddingBottom: theme.spacing(4),
-    paddingLeft: theme.spacing(3.5),
-    paddingTop: theme.spacing(4),
-  },
-
   collapse: {
     borderBottom: '4px solid #383838',
     paddingLeft: theme.spacing(1.5),
     paddingRight: theme.spacing(1.5),
     marginBottom: 32,
+  },
+
+  container: {
+    paddingBottom: theme.spacing(4),
+    paddingLeft: theme.spacing(3.5),
+    paddingTop: theme.spacing(4),
   },
 
   expand: {
@@ -49,10 +49,6 @@ export default function Home() {
   const [expanded, setExpanded] = React.useState(false);
 
   const classes = useStyles();
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   /**
    * Get Recommended
@@ -92,6 +88,13 @@ export default function Home() {
         })}
       </>
     );
+  };
+
+  /**
+   * Handle Expand Click
+   */
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
   };
 
   return (

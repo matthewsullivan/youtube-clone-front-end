@@ -85,9 +85,6 @@ const useStyles = makeStyles((theme) => ({
 
   tab: {
     borderBottom: '1px solid #3e3e3e',
-    minHeight: 56,
-    textAlign: 'right',
-    textTransform: 'none',
     maxWidth: '100%',
     '& span': {
       alignItems: 'flex-start',
@@ -95,6 +92,9 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'row-reverse',
       justifyContent: 'space-between',
     },
+    minHeight: 56,
+    textAlign: 'right',
+    textTransform: 'none',
   },
 
   tabs: {

@@ -12,8 +12,8 @@ import Typography from '@material-ui/core/Typography';
 
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-import {makeStyles} from '@material-ui/core/styles';
 import {CardContent} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
 
 import PropTypes from 'prop-types';
 
@@ -187,11 +187,6 @@ export default function VideoThumbail(props) {
         title="Video Thumbnail"
       />
       <CardHeader
-        avatar={
-          <Avatar aria-label="channel icon" className={classes.avatar}>
-            R
-          </Avatar>
-        }
         action={
           <IconButton
             aria-label="settings"
@@ -200,6 +195,11 @@ export default function VideoThumbail(props) {
           >
             <MoreVertIcon />
           </IconButton>
+        }
+        avatar={
+          <Avatar aria-label="channel icon" className={classes.avatar}>
+            R
+          </Avatar>
         }
         className={classes.header}
         subheader={
